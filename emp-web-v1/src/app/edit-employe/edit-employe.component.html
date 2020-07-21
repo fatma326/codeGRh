@@ -1,0 +1,138 @@
+<div class="container">
+    <h1> Edition d'employer</h1>
+
+    <div *ngIf="submitted" class="alert alert-success" role="alert">
+        L'employe a ete mis a jour !
+
+        <a [title]="'Editer'" [routerLink]="['/recherche-employe']">
+            Retrouner a la recherche
+        </a>
+    </div>
+
+    <div class="submit-form">
+      <div *ngIf="employer">
+        <div class="form-group">
+          <label for="nom">Nom:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nom"
+            required
+            [(ngModel)]="employer.nom"
+            name="title"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="prenom">Prenom:</label>
+          <input
+            class="form-control"
+            id="prenom"
+            required
+            [(ngModel)]="employer.prenom"
+            name="prenom"
+          />
+
+          <div class="form-group">
+            <label for="prenom">Adresse:</label>
+            <input
+              class="form-control"
+              id="adresse"
+              [(ngModel)]="employer.adresse"
+              name="adresse"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="prenom">Contact:</label>
+            <input
+              class="form-control"
+              id="contact"
+              [(ngModel)]="employer.contact"
+              name="contact"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="prenom">Etat:</label>
+
+
+            <select
+                name="etat"
+                id="etat"
+                class="form-control"
+                [(ngModel)]="employer.etat">
+                <option value="1" >Actif</option>
+                <option value="0" >Inactif</option>
+            </select>
+
+          </div>
+
+          <div class="form-group">
+            <label for="prenom">Titre:</label>
+            <input
+              class="form-control"
+              id="titre"
+              [(ngModel)]="employer.titre"
+              name="titre"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="situationFamilialle">Situation Familialle:</label>
+            <input
+              class="form-control"
+              id="situation Familialle"
+              [(ngModel)]="employer.situationFamilialle"
+              name="situation Familialle"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input
+              class="form-control"
+              id="email"
+              [(ngModel)]="employer.email"
+              name="email"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="genre">Genre:</label>
+            <select
+              name="genre"
+              id="genre"
+              class="form-control"
+              [(ngModel)]="employer.genre">
+              <option value="homme" >homme</option>
+              <option value="femme" >Femme</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="numeroCompte">Numero Compte:</label>
+            <input
+              class="form-control"
+              id="numeroCompte"
+              [(ngModel)]="employer.numeroCompte"
+              name="numeroCompte"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="nni">NNI:</label>
+            <input
+              class="form-control"
+              id="nni"
+              [(ngModel)]="employer.nni"
+              name="nni"
+            />
+          </div>
+
+          <button (click)="putEmployee()" class="btn btn-success">Mettre A jour</button>
+      </div>
+
+      </div>
+    </div>
+</div>

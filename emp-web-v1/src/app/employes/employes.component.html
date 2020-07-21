@@ -1,0 +1,232 @@
+<div class="container">
+     <div class="panel panel-primary">
+        <div class="panel panel-heading">Liste des employes</div>
+        <div class="panel-body">
+          <button class="btn btn-primary" (click)="onGetEmployes()"> Employes</button> &nbsp;
+          <button class="btn btn-primary" (click)="ajouterEmployer()"> Ajouter Employer</button>
+        </div>
+        <div class="panel-body">
+          <table *ngIf="employies && mode=='lister'" class="table table-striped">
+           <thead>
+           <tr>
+             <th>idEmploye</th>
+             <th>nom</th>
+             <th>prenom</th>
+             <th>contact</th>
+             <th>titre</th>
+           </tr>
+           </thead>
+           <tbody>
+           <tr *ngFor="let p of employies._embedded.employes">
+             <td>
+               <b>
+                <a [routerLink]="" (click)="afficherEmployer(p)">{{p.idEmploye}}</a>
+              </b>
+             </td>
+             <td>{{p.nom}}</td>
+             <td>{{p.prenom}}</td>
+             <td>{{p.contact}}</td>
+             <td>{{p.titre}}</td>
+           </tr>
+           </tbody>
+         </table>
+
+          <div *ngIf="mode == 'afficher'" >
+           <table class="table table-borderless">
+             <colgroup>
+               <col width="10%">
+               <col width="*">
+             </colgroup>
+             <tbody>
+             <tr>
+               <th scope="row">Nom:</th>
+               <td>{{employe.nom}}</td>
+             </tr>
+             <tr>
+               <th scope="row">Prenom:</th>
+               <td>{{employe.prenom}}</td>
+             </tr>
+             <tr>
+               <th scope="row">Adresse:</th>
+               <td>{{employe.adresse}}</td>
+             </tr>
+             <tr>
+               <th scope="row">Contact:</th>
+               <td>{{employe.contact}}</td>
+             </tr>
+             <tr>
+               <th scope="row">Etat:</th>
+               <td>{{employe.etat}}</td>
+             </tr>
+             <tr>
+               <th scope="row">Titre:</th>
+               <td>{{employe.titre}}</td>
+             </tr>
+             <tr>
+               <th scope="row">situationFamilialle:</th>
+               <td>{{employe.situationFamilialle}}</td>
+             </tr>
+             <tr>
+               <th scope="row">Email:</th>
+               <td>{{employe.email}}</td>
+             </tr>
+             <tr>
+               <th scope="row">Genre:</th>
+               <td>{{employe.genre}}</td>
+             </tr>
+             <tr>
+               <th scope="row">Numero Compte:</th>
+               <td>{{employe.numeroCompte}}</td>
+             </tr>
+             <tr>
+               <th scope="row">NNI:</th>
+               <td>{{employe.nni}}</td>
+             </tr>
+             </tbody>
+           </table>
+
+            <button (click)="modifierEmployer(employe)" >Modifier </button>
+            <button (click)="supprimerEmployer(employe)" >Supprimer</button>
+
+         </div>
+
+          <div *ngIf="mode == 'ajouter'">
+            <div class="submit-form">
+              <div *ngIf="!submitted">
+                <div class="form-group">
+                  <label for="nom">Nom:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nom"
+                    required
+                    [(ngModel)]="employe.nom"
+                    name="title"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="prenom">Prenom:</label>
+                  <input
+                    class="form-control"
+                    id="prenom"
+                    required
+                    [(ngModel)]="employe.prenom"
+                    name="prenom"
+                  />
+
+                  <div class="form-group">
+                    <label for="prenom">Adresse:</label>
+                    <input
+                      class="form-control"
+                      id="adresse"
+                      [(ngModel)]="employe.adresse"
+                      name="adresse"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="prenom">Contact:</label>
+                    <input
+                      class="form-control"
+                      id="contact"
+                      [(ngModel)]="employe.contact"
+                      name="contact"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="prenom">Etat:</label>
+
+
+                    <select
+                      name="etat"
+                      id="etat"
+                      class="form-control"
+                      [(ngModel)]="employe.etat">
+                      <option value="1" >Actif</option>
+                      <option value="0" >Inactif</option>
+                    </select>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="prenom">Titre:</label>
+                    <input
+                      class="form-control"
+                      id="titre"
+                      [(ngModel)]="employe.titre"
+                      name="titre"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="situationFamilialle">Situation Familialle:</label>
+                    <input
+                      class="form-control"
+                      id="situationFamilialle"
+                      [(ngModel)]="employe.situationFamilialle"
+                      name="situationFamilialle"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input
+                      class="form-control"
+                      id="email"
+                      [(ngModel)]="employe.email"
+                      name="email"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="genre">Genre:</label>
+                    <select
+                      name="genre"
+                      id="genre"
+                      class="form-control"
+                      [(ngModel)]="employe.genre">
+                      <option value="male" >Male</option>
+                      <option value="femelle" >Femelle</option>
+                    </select>
+                  </div>
+
+
+
+                  <div class="form-group">
+                    <label for="numeroCompte">Numero Compte:</label>
+                    <input
+                      class="form-control"
+                      id="numeroCompte"
+                      [(ngModel)]="employe.numeroCompte"
+                      name="numeroCompte"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="nni">NNI:</label>
+                    <input
+                      class="form-control"
+                      id="nni"
+                      [(ngModel)]="employe.nni"
+                      name="nni"
+                    />
+                  </div>
+
+                  <button (click)="postEmployee()" class="btn btn-success">Submit</button>
+                </div>
+
+              </div>
+
+              <div *ngIf="submitted">
+                <h4>L'employe a ete ajoute !</h4>
+              </div>
+            </div>
+          </div>
+
+       </div>
+
+
+     </div>
+</div>
