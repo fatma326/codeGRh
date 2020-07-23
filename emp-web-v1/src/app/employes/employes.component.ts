@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 // @ts-ignore
 @Component({
@@ -16,7 +18,7 @@ export class EmployesComponent implements OnInit {
 
   public mode = 'lister'; //affichage, ajouter, modifier, supprimer
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -45,6 +47,7 @@ this.httpClient.get('http://localhost:8080/employes')
 
   ajouterEmployer(){
     this.mode = 'ajouter'
+    this.submitted = false;
     this.employe = {
       "nom" : '',
       "prenom" : '',
@@ -67,11 +70,51 @@ this.httpClient.get('http://localhost:8080/employes')
 
   modifierEmployer(employe) {
     this.employe = employe
+    this.submitted = false;
     this.mode = 'modifier'
+  }
+
+  putEmployee() {
+    this.httpClient.put('http://localhost:8080/listemployes/'+this.employe.idEmploye, this.employe)
+    .subscribe(data => {
+      //this.employer = data;
+      console.log("employee a ete mis a jour!!")
+      this.submitted = true;
+    }, err => {
+      console.log(err);
+    }, );
   }
 
   supprimerEmployer(employe) {
     this.employe = employe;
-    this.mode = 'supprimer'
+    //this.mode = 'supprimer'
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Confimer la suppression',
+        message: 'Etes vous sure de vouloir supprimer l\'employe ' + this.employe.nom  + ' ?'
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        console.log("Employee delete confirmed");
+        this.deleteEmployee()
+      }
+    });
+
   }
+
+  deleteEmployee() {
+    this.httpClient.delete('http://localhost:8080/listemployes/'+this.employe.idEmploye)
+    .subscribe(data => {
+      //this.employer = data;
+      console.log("employee a ete supprimer!!")
+      this.submitted = true;
+      this.mode = 'supprimer'
+    }, err => {
+      this.submitted = false;
+      console.log(err);
+    }, );
+  }
+
+
 }

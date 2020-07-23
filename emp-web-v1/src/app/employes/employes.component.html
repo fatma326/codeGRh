@@ -3,7 +3,7 @@
         <div class="panel panel-heading">Liste des employes</div>
         <div class="panel-body">
           <button class="btn btn-primary" (click)="onGetEmployes()"> Employes</button> &nbsp;
-          <button class="btn btn-primary" (click)="ajouterEmployer()"> Ajouter Employer</button>
+          <button class="btn btn-primary" (click)="ajouterEmployer()"> Ajouter Employe</button>
         </div>
         <div class="panel-body">
           <table *ngIf="employies && mode=='lister'" class="table table-striped">
@@ -14,6 +14,7 @@
              <th>prenom</th>
              <th>contact</th>
              <th>titre</th>
+             <th>NNI</th>
            </tr>
            </thead>
            <tbody>
@@ -27,6 +28,7 @@
              <td>{{p.prenom}}</td>
              <td>{{p.contact}}</td>
              <td>{{p.titre}}</td>
+             <td>{{p.nni}}</td>
            </tr>
            </tbody>
          </table>
@@ -85,13 +87,14 @@
              </tbody>
            </table>
 
-            <button (click)="modifierEmployer(employe)" >Modifier </button>
-            <button (click)="supprimerEmployer(employe)" >Supprimer</button>
+            <button class="btn btn-warning" (click)="modifierEmployer(employe)" > Modifier </button> &nbsp;
+            <button class="btn btn-danger" (click)="supprimerEmployer(employe)" > Supprimer</button>
 
          </div>
 
           <div *ngIf="mode == 'ajouter'">
             <div class="submit-form">
+              <form #addForm="ngForm">
               <div *ngIf="!submitted">
                 <div class="form-group">
                   <label for="nom">Nom:</label>
@@ -114,6 +117,7 @@
                     [(ngModel)]="employe.prenom"
                     name="prenom"
                   />
+                </div>
 
                   <div class="form-group">
                     <label for="prenom">Adresse:</label>
@@ -214,16 +218,155 @@
                     />
                   </div>
 
-                  <button (click)="postEmployee()" class="btn btn-success">Submit</button>
+                  <button (click)="postEmployee()" class="btn btn-success" [disabled]="addForm.form.invalid">Ajouter</button>
                 </div>
-
+              </form>
               </div>
 
               <div *ngIf="submitted">
                 <h4>L'employe a ete ajoute !</h4>
               </div>
+          </div>
+
+          <div *ngIf="mode == 'supprimer'">
+              <div class="alert alert-success" role="alert">
+                l'employer a ete supprime!
+              </div>
+          </div>
+
+          <div *ngIf="mode == 'modifier'">
+            <div *ngIf="submitted" class="alert alert-success" role="alert">
+              L'employer a ete mis a jour !
+            </div>
+
+            <div class="submit-form">
+              <div *ngIf="employe">
+                <form #editForm="ngForm">
+                <div class="form-group">
+                  <label for="nom">Nom:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nom"
+                    required
+                    [(ngModel)]="employe.nom"
+                    name="title"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="prenom">Prenom:</label>
+                  <input
+                    class="form-control"
+                    id="prenom"
+                    required
+                    [(ngModel)]="employe.prenom"
+                    name="prenom"
+                  />
+
+                  <div class="form-group">
+                    <label for="prenom">Adresse:</label>
+                    <input
+                      class="form-control"
+                      id="adresse"
+                      [(ngModel)]="employe.adresse"
+                      name="adresse"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="prenom">Contact:</label>
+                    <input
+                      class="form-control"
+                      id="contact"
+                      [(ngModel)]="employe.contact"
+                      name="contact"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="prenom">Etat:</label>
+
+
+                    <select
+                        name="etat"
+                        id="etat"
+                        class="form-control"
+                        [(ngModel)]="employe.etat">
+                        <option value="1" >Actif</option>
+                        <option value="0" >Inactif</option>
+                    </select>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="prenom">Titre:</label>
+                    <input
+                      class="form-control"
+                      id="titre"
+                      [(ngModel)]="employe.titre"
+                      name="titre"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="situationFamilialle">Situation Familialle:</label>
+                    <input
+                      class="form-control"
+                      id="situation Familialle"
+                      [(ngModel)]="employe.situationFamilialle"
+                      name="situation Familialle"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input
+                      class="form-control"
+                      id="email"
+                      [(ngModel)]="employe.email"
+                      name="email"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="genre">Genre:</label>
+                    <select
+                      name="genre"
+                      id="genre"
+                      class="form-control"
+                      [(ngModel)]="employe.genre">
+                      <option value="homme" >homme</option>
+                      <option value="femme" >Femme</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="numeroCompte">Numero Compte:</label>
+                    <input
+                      class="form-control"
+                      id="numeroCompte"
+                      [(ngModel)]="employe.numeroCompte"
+                      name="numeroCompte"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="nni">NNI:</label>
+                    <input
+                      class="form-control"
+                      id="nni"
+                      [(ngModel)]="employe.nni"
+                      name="nni"
+                    />
+                  </div>
+
+                  <button type="submit" (click)="putEmployee()" class="btn btn-success" [disabled]="editForm.form.invalid">Mettre A jour</button>
+              </div>
+              </form>
             </div>
           </div>
+        </div>
 
        </div>
 
