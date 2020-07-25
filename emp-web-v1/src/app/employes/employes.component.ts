@@ -16,17 +16,18 @@ export class EmployesComponent implements OnInit {
 
   public submitted = false;
 
-  public mode = 'lister'; //affichage, ajouter, modifier, supprimer
+  public mode = 'lister'; // affichage, ajouter, modifier, supprimer
 
   constructor(private httpClient: HttpClient, private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+
   // tslint:disable-next-line:typedef
   onGetEmployes() {
     this.mode = 'lister';
-this.httpClient.get('http://localhost:8080/employes')
+    this.httpClient.get('http://localhost:8181/employes')
   .subscribe(data => {
     this.employies = data;
   }, err => {
@@ -35,7 +36,7 @@ this.httpClient.get('http://localhost:8080/employes')
   }
 
   postEmployee() {
-    this.httpClient.post('http://localhost:8080/listemployes', this.employe)
+    this.httpClient.post('http://localhost:8181/listemployes', this.employe)
       .subscribe(data => {
         //this.employer = data;
         console.log("employee a ete ajoute!!")
@@ -69,13 +70,13 @@ this.httpClient.get('http://localhost:8080/employes')
   }
 
   modifierEmployer(employe) {
-    this.employe = employe
+    this.employe = employe;';'
     this.submitted = false;
     this.mode = 'modifier'
   }
 
   putEmployee() {
-    this.httpClient.put('http://localhost:8080/listemployes/'+this.employe.idEmploye, this.employe)
+    this.httpClient.put('http://localhost:8181/listemployes/'+this.employe.idEmploye, this.employe)
     .subscribe(data => {
       //this.employer = data;
       console.log("employee a ete mis a jour!!")
@@ -104,7 +105,7 @@ this.httpClient.get('http://localhost:8080/employes')
   }
 
   deleteEmployee() {
-    this.httpClient.delete('http://localhost:8080/listemployes/'+this.employe.idEmploye)
+    this.httpClient.delete('http://localhost:8181/listemployes/'+this.employe.idEmploye)
     .subscribe(data => {
       //this.employer = data;
       console.log("employee a ete supprimer!!")
