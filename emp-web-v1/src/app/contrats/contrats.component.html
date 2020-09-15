@@ -1,0 +1,176 @@
+
+<div class="container">
+    <div class="panel panel-primary">
+       <div class="panel panel-heading">Gestion des Displines</div>
+       <div class="panel-body">
+         <button type="button" class="btn btn-default btn-sm" (click)="onGetContrats()">
+           <span class="glyphicon glyphicon-th-list"></span> List Des Contrats
+         </button>
+       </div>
+
+       <div class="panel-body">
+
+
+        <div *ngIf="mode == 'afficher'" >
+
+            <div class="row" style="margin-bottom: 15px;">
+                  <div class="col-md-6">
+                      <label class="col-sm-3 control-label">Numero :</label>
+                      <div class="col-sm-9">
+                        {{contrat.numero}}
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="col-sm-3 control-label">Type:</label>
+                    <div class="col-sm-9">
+                      {{contrat.type}}
+                    </div>
+                  </div>
+            </div>
+
+            <button class="btn btn-warning btn-sm" (click)="modifier(contrat)" > Modifier </button> &nbsp;
+            <button class="btn btn-danger btn-sm" (click)="supprimer(contrat)" > Supprimer</button>
+
+        </div> <!-- End afficher -->
+
+        <div *ngIf="mode == 'ajouter'">
+            <div class="submit-form">
+              <form #addForm="ngForm" class="form-horizontal">
+                <div *ngIf="!submitted">
+                    <div class="form-row">
+                    <div class="form-group col-sm-4" >
+                        <label for="numero" class="col-sm-3 control-label" >Numero:</label>
+                        <div class="col-sm-9">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="numero"
+                            required
+                            [(ngModel)]="contrat.numero"
+                            name="numero"
+                        />
+                    </div>
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                        <label for="type" class="col-sm-3 control-label">Type:</label>
+                        <div class="col-sm-9">
+                        <input
+                            class="form-control"
+                            id="type"
+                            required
+                            [(ngModel)]="contrat.type"
+                            name="type"
+                        />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="col-sm-offset-3 col-sm-10" >
+                        <button (click)="post()" class="btn btn-success" [disabled]="addForm.form.invalid">Ajouter</button>
+                      </div>
+                    </div>
+
+                    </div>
+                </div>
+              </form>
+            </div>
+
+            <div *ngIf="submitted" class="alert alert-success" role="alert">
+              Le contrat a ete ajoute !
+            </div>
+        </div> <!-- End ajouter -->
+
+        <div *ngIf="mode == 'supprimer'">
+            <div class="alert alert-success" role="alert">
+              le contrat a ete supprime!
+            </div>
+        </div>
+
+        <div *ngIf="mode == 'modifier'">
+            <div *ngIf="submitted" class="alert alert-success" role="alert">
+              Le contrat a ete mis a jour !
+            </div>
+
+            <div class="submit-form">
+                <div *ngIf="contrat">
+
+                    <form #editForm="ngForm" class="form-horizontal">
+
+                        <div class="form-row">
+                            <div class="form-group col-sm-4" >
+                                <label for="numero" class="col-sm-3 control-label" >Numero:</label>
+                                <div class="col-sm-9">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="numero"
+                                        required
+                                        [(ngModel)]="contrat.numero"
+                                        name="numero"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-4">
+                                <label for="type" class="col-sm-3 control-label">Type:</label>
+                                <div class="col-sm-9">
+                                <input
+                                    class="form-control"
+                                    id="type"
+                                    required
+                                    [(ngModel)]="contrat.type"
+                                    name="type"
+                                />
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-md-4">
+                                <div class="col-sm-offset-3 col-sm-10" >
+                                    <button type="submit" (click)="put()" class="btn btn-success" [disabled]="editForm.form.invalid">Mettre A jour</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="contrats && mode">
+            <div class="row">
+                <div class="col-sm-12">
+                <div class="grid-toolbar text-right" style="margin-bottom: 10px;">
+                  <button type="button" class="btn btn-default" (click)="ajouter()">
+                    <span class="glyphicon glyphicon-plus"></span> Ajouter
+                  </button>
+                </div>
+                <div class="grid-toolbar text-right">
+                    <button type="button" class="btn btn-default float-right" style="margin-bottom: 10px;"  (click)="onBtnExport()">
+                      <span class="glyphicon glyphicon glyphicon-open" aria-hidden="true"></span> Exporter
+                    </button>
+                </div>
+              </div>
+            </div>
+            <ag-grid-angular
+                    #agGrid
+                    style="width: 100%;"
+                    class="ag-theme-alpine"
+                    domLayout='autoHeight'
+                    [rowData]="contrats"
+                    [columnDefs]="columnDefs"
+                    [context]="context"
+                    [frameworkComponents]="frameworkComponents"
+                    (gridReady)="onGridReady($event)"
+                    >
+            </ag-grid-angular>
+          </div>
+
+       </div> <!-- End panel-body -->
+
+
+    </div> <!-- End panel-primary -->
+
+
+</div> <!-- End container -->

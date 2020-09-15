@@ -1,0 +1,316 @@
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel panel-heading">Gestion des primes Fixes </div>
+    <div class="panel-body">
+      <button type="button" class="btn btn-default btn-sm" (click)="onGetList()">
+        <span class="glyphicon glyphicon-th-list"></span> List Des primes Fixes
+      </button>
+    </div>
+
+    <div class="panel-body">
+
+      <div *ngIf="mode == 'afficher'" >
+
+        <div class="row" style="margin-bottom: 15px;">
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">Id:</label>
+            <div class="col-sm-9">
+              {{item.idprimeF}}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">nom Prime:</label>
+            <div class="col-sm-9">
+              {{item.nomPrime}}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">type_Prime:</label>
+            <div class="col-sm-9">
+              {{item.type_Prime}}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">date_primefx:</label>
+            <div class="col-sm-9">
+              {{item.date_primefx}}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">Code_Prime:</label>
+            <div class="col-sm-9">
+              {{item.code_Prime}}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">exonoree:</label>
+            <div class="col-sm-9">
+              {{item.exonoree}}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">valeur_prime:</label>
+            <div class="col-sm-9">
+              {{item.valeur_prime}}
+            </div>
+          </div>
+
+
+        </div>
+
+        <button class="btn btn-warning btn-sm" (click)="modifier(item)" > Modifier </button> &nbsp;
+        <button class="btn btn-danger btn-sm" (click)="supprimer(item)" > Supprimer</button>
+
+      </div> <!-- End afficher -->
+
+      <div *ngIf="mode == 'ajouter'">
+        <div class="submit-form">
+          <form #addForm="ngForm" class="form-horizontal">
+            <div *ngIf="!submitted">
+              <div class="form-row">
+                <div class="form-group col-sm-6" >
+                  <label for="nomPrime" class="col-sm-3 control-label" >nomPrime:</label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nomPrime"
+                      required
+                      [(ngModel)]="item.nomPrime"
+                      name="nomPrime"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="type_Prime" class="col-sm-3 control-label" > type_Prime: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="type_Prime"
+                      [(ngModel)]="item.type_Prime"
+                      name="type_Prime"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="date_primefx" class="col-sm-3 control-label" >date_primefx: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="date"
+                      placeholder="Format JJ/MM/AAAA"
+                      class="form-control"
+                      id="date_primefx"
+                      [(ngModel)]="item.date_primefx"
+                      name="date"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="Code_Prime" class="col-sm-3 control-label" >Code_Prime: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="Code_Prime"
+                      [(ngModel)]="item.code_Prime"
+                      name="description"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="exonoree" class="col-sm-3 control-label" >exonoree: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exonoree"
+                      [(ngModel)]="item.exonoree"
+                      name="exonoree"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="valeur_prime" class="col-sm-3 control-label" >valeur_prime: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="valeur_prime"
+                      [(ngModel)]="item.valeur_prime"
+                      name="valeur_prime"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <div class="col-sm-offset-3 col-sm-10" >
+                    <button (click)="post()" class="btn btn-success" [disabled]="addForm.form.invalid">Ajouter</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div *ngIf="submitted" class="alert alert-success" role="alert">
+          L'element a ete ajoute !
+        </div>
+      </div> <!-- End ajouter -->
+
+      <div *ngIf="mode == 'supprimer'">
+        <div class="alert alert-success" role="alert">
+          l'element a ete supprime!
+        </div>
+      </div>
+
+      <div *ngIf="mode == 'modifier'">
+        <div *ngIf="submitted" class="alert alert-success" role="alert">
+          L'element a ete mis a jour !
+        </div>
+
+        <div class="submit-form">
+          <div *ngIf="item">
+
+            <form #editForm="ngForm" class="form-horizontal">
+              <div class="form-row">
+
+
+                <div class="form-group col-sm-6" >
+                  <label for="nomPrime" class="col-sm-3 control-label" >nomPrime:</label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nomPrime"
+                      required
+                      [(ngModel)]="item.nomPrime"
+                      name="nomPrime"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="type_Prime" class="col-sm-3 control-label" > type_Prime: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="type_Prime"
+                      [(ngModel)]="item.type_Prime"
+                      name="type_Prime"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="date_primefx" class="col-sm-3 control-label" >date_primefx: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="date"
+                      placeholder="Format JJ/MM/AAAA"
+                      class="form-control"
+                      id="date_primefx"
+                      [(ngModel)]="item.date_primefx"
+                      name="date"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="Code_Prime" class="col-sm-3 control-label" >Code_Prime: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="Code_Prime"
+                      [(ngModel)]="item.code_Prime"
+                      name="description"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="exonoree" class="col-sm-3 control-label" >exonoree: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exonoree"
+                      [(ngModel)]="item.exonoree"
+                      name="exonoree"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="valeur_prime" class="col-sm-3 control-label" >valeur_prime: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="valeur_prime"
+                      [(ngModel)]="item.valeur_prime"
+                      name="valeur_prime"
+                    />
+                  </div>
+                </div>
+
+
+                <div class="form-group col-md-6">
+                  <div class="col-sm-offset-3 col-sm-10" >
+                    <button type="submit" (click)="put()" class="btn btn-success" [disabled]="editForm.form.invalid">Mettre A jour</button>
+                  </div>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="list && mode">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="grid-toolbar text-right" style="margin-bottom: 10px;">
+              <button type="button" class="btn btn-default" (click)="ajouter()">
+                <span class="glyphicon glyphicon-plus"></span> Ajouter
+              </button>
+            </div>
+            <div class="grid-toolbar text-right">
+              <button type="button" class="btn btn-default float-right" style="margin-bottom: 10px;"  (click)="onBtnExport()">
+                <span class="glyphicon glyphicon glyphicon-open" aria-hidden="true"></span> Exporter
+              </button>
+            </div>
+          </div>
+        </div>
+        <ag-grid-angular
+          #agGrid
+          style="width: 100%;"
+          class="ag-theme-alpine"
+          domLayout='autoHeight'
+          [rowData]="list"
+          [columnDefs]="columnDefs"
+          [context]="context"
+          [frameworkComponents]="frameworkComponents"
+          (gridReady)="onGridReady($event)"
+        >
+        </ag-grid-angular>
+      </div>
+
+    </div> <!-- End panel-body -->
+
+
+  </div> <!-- End panel-primary -->
+
+
+</div> <!-- End container -->
+

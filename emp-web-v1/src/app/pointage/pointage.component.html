@@ -1,0 +1,382 @@
+
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel panel-heading">Gestion des Pointages </div>
+    <div class="panel-body">
+      <button type="button" class="btn btn-default btn-sm" (click)="onGetList()">
+        <span class="glyphicon glyphicon-th-list"></span> List des Pointages
+      </button>
+    </div>
+
+    <div class="panel-body">
+
+      <div *ngIf="mode == 'afficher'" >
+
+        <div class="row" style="margin-bottom: 15px;">
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">Id:</label>
+            <div class="col-sm-9">
+              {{item.employe.idEmploye}}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">heures_entree:</label>
+            <div class="col-sm-9">
+              {{item.heures_entree}}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">heures_sortie:</label>
+            <div class="col-sm-9">
+              {{item.heures_sortie}}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">Date_Pointage:</label>
+            <div class="col-sm-9">
+              {{item.Date_Pointage}}
+            </div>
+          </div>
+
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">absence:</label>
+            <div class="col-sm-9">
+              {{item.absence}}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">type_absence:</label>
+            <div class="col-sm-9">
+              {{item.type_absence}}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">weekend:</label>
+            <div class="col-sm-9">
+              {{item.weekend}}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">ferier:</label>
+            <div class="col-sm-9">
+              {{item.ferier}}
+            </div>
+          </div>
+
+
+        </div>
+
+        <button class="btn btn-warning btn-sm" (click)="modifier(item)" > Modifier </button> &nbsp;
+        <button class="btn btn-danger btn-sm" (click)="supprimer(item)" > Supprimer</button>
+
+        <!-- Example single danger button -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Action
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/avances">avance Sur Salaire</a>
+            <a class="dropdown-item" href="/comptes">compte</a>
+            <a class="dropdown-item" href="/prets">prets</a>
+          </div>
+        </div>
+
+
+
+
+
+      </div> <!-- End afficher -->
+
+      <div *ngIf="mode == 'ajouter'">
+        <div class="submit-form">
+          <form #addForm="ngForm" class="form-horizontal">
+            <div *ngIf="!submitted">
+              <div class="form-row">
+
+                <div class="form-group col-sm-6" >
+                  <label for="heures_entree" class="col-sm-3 control-label" >heures_entree:</label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="heures_entree"
+                      required
+                      [(ngModel)]="item.heures_entree"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="heures_sortie" class="col-sm-3 control-label" >heures_sortie: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="heures_sortie"
+                      [(ngModel)]="item.heures_sortie"
+                      name="heures_sortie"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="Date_Pointage" class="col-sm-3 control-label" >Date_Pointage: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="date"
+                      placeholder="Format AAAA_MM_JJ"
+                      class="form-control"
+                      id="Date_Pointage"
+                      [(ngModel)]="item.date_Pointage"
+                      name="date"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="absence" class="col-sm-3 control-label" >absence: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="absence"
+                      [(ngModel)]="item.absence"
+                      name="absence"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="type_absence" class="col-sm-3 control-label" >type_absence: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="type_absence"
+                      [(ngModel)]="item.type_absence"
+                      name="type_absence"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="weekend" class="col-sm-3 control-label" >weekend: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="weekend"
+                      [(ngModel)]="item.weekend"
+                      name="weekend"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="ferier" class="col-sm-3 control-label" >ferier: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="ferier"
+                      [(ngModel)]="item.ferier"
+                      name="ferier"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="ferier" class="col-sm-3 control-label" >emp: </label>
+                  <div class="col-sm-9">
+                    <select  class="form-control" (change)="onSelect($event)" >
+                      <option *ngFor="let emp of employes" [ngValue]="emp.id"> {{emp.nom}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <div class="col-sm-offset-3 col-sm-10" >
+                    <button (click)="post()" class="btn btn-success" [disabled]="addForm.form.invalid">Ajouter</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div *ngIf="submitted" class="alert alert-success" role="alert">
+          L'element a ete ajoute !
+        </div>
+      </div> <!-- End ajouter -->
+
+      <div *ngIf="mode == 'supprimer'">
+        <div class="alert alert-success" role="alert">
+          l'element a ete supprime!
+        </div>
+      </div>
+
+      <div *ngIf="mode == 'modifier'">
+        <div *ngIf="submitted" class="alert alert-success" role="alert">
+          L'element a ete mis a jour !
+        </div>
+
+        <div class="submit-form">
+          <div *ngIf="item">
+
+            <form #editForm="ngForm" class="form-horizontal">
+              <div class="form-row">
+
+                <div class="form-group col-sm-6" >
+                  <label for="heures_entree" class="col-sm-3 control-label" >heures_entree:</label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="heures_entree"
+                      required
+                      [(ngModel)]="item.heures_entree"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="heures_sortie" class="col-sm-3 control-label" >heures_sortie: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="heures_sortie"
+                      [(ngModel)]="item.heures_sortie"
+                      name="heures_sortie"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="Date_Pointage" class="col-sm-3 control-label" >Date_Pointage: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="date"
+                      placeholder="Format AAAA_MM_JJ"
+                      class="form-control"
+                      [(ngModel)]="item.date_Pointage"
+                      name="Date_Pointage"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="absence" class="col-sm-3 control-label" >absence: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="absence"
+                      [(ngModel)]="item.absence"
+                      name="description"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="type_absence" class="col-sm-3 control-label" >type_absence: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="type_absence"
+                      [(ngModel)]="item.type_absence"
+                      name="demande_explication"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="weekend" class="col-sm-3 control-label" >weekend: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="weekend"
+                      [(ngModel)]="item.weekend"
+                      name="description"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="ferier" class="col-sm-3 control-label" >ferier: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="ferier"
+                      [(ngModel)]="item.ferier"
+                      name=""
+                    />
+                  </div>
+                </div>
+                <div class="form-group col-sm-6" >
+                  <label for="ferier" class="col-sm-3 control-label" >emp: </label>
+                  <div class="col-sm-9">
+                    <select class="form-control" [(ngModel)]="item.employe" [ngModelOptions]="{standalone: true}">
+                      <option *ngFor="let emp of employes" [ngValue]="emp.id"> {{emp.nom}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <div class="col-sm-offset-3 col-sm-10" >
+                    <button type="submit" (click)="put()" class="btn btn-success" [disabled]="editForm.form.invalid">Mettre A jour</button>
+                  </div>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="list && mode">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="grid-toolbar text-right" style="margin-bottom: 10px;">
+              <button type="button" class="btn btn-default" (click)="ajouter()">
+                <span class="glyphicon glyphicon-plus"></span> Ajouter
+              </button>
+            </div>
+            <div class="grid-toolbar text-right">
+              <button type="button" class="btn btn-default float-right" style="margin-bottom: 10px;"  (click)="onBtnExport()">
+                <span class="glyphicon glyphicon glyphicon-open" aria-hidden="true"></span> Exporter
+              </button>
+            </div>
+          </div>
+        </div>
+        <ag-grid-angular
+          #agGrid
+          style="width: 100%;"
+          class="ag-theme-alpine"
+          domLayout='autoHeight'
+          [rowData]="list"
+          [columnDefs]="columnDefs"
+          [context]="context"
+          [frameworkComponents]="frameworkComponents"
+          (gridReady)="onGridReady($event)"
+        >
+        </ag-grid-angular>
+      </div>
+
+    </div> <!-- End panel-body -->
+
+
+  </div> <!-- End panel-primary -->
+
+
+</div> <!-- End container -->
+

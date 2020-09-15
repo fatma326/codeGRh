@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2dc9c450-573d-4c00-b3d4-772c0aed2a5b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/Anciennete.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/AncienneteRestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/CNAM.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/CNSS.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/CnamRestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/CnssRestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/Displine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/DisplineRestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/Fonction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/FonctionRestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/ITS.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/ItsRestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/Profession.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/ProfessionRestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/Type_conRestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/Type_contrat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/Type_depRestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/Type_departement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/dao/AncienneteRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/dao/CnamRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/dao/CnssRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/dao/DisplineRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/dao/FonctionRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/dao/ItsRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/dao/ProfessionRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/dao/TypeDepartement_Repository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/dao/typeContrat_Repository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emp-web-v1/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/emp-web-v1/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emp-web-v1/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/emp-web-v1/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emp-web-v1/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/emp-web-v1/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emp-web-v1/src/app/employes-action-renderer/employes-action-renderer.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/emp-web-v1/src/app/employes-action-renderer/employes-action-renderer.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emp-web-v1/src/app/employes-action-renderer/employes-action-renderer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/emp-web-v1/src/app/employes-action-renderer/employes-action-renderer.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emp-web-v1/src/app/employes/employes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/emp-web-v1/src/app/employes/employes.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emp-web-v1/src/app/employes/employes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/emp-web-v1/src/app/employes/employes.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emp-web-v1/src/app/recherche-employe/recherche-employe.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/emp-web-v1/src/app/recherche-employe/recherche-employe.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/Employe.java" beforeDir="false" afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/Employe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/EmployeRestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/EmployeRestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/ProjetGrhApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/projet-grh/src/main/java/org/sid/projetgrh/ProjetGrhApplication.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1gYBFIPjw9nmclqKjQNI4OXcc9d" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunManager" selected="npm.Angular CLI Server">
+    <configuration name="E2E Tests (emp-web-v1)" type="JavaScriptTestRunnerProtractor">
+      <config-file value="$PROJECT_DIR$/emp-web-v1/e2e/protractor.conf.js" />
+      <node-interpreter value="project" />
+      <protractor-options value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
+      <method v="2" />
+    </configuration>
+    <configuration name="Angular CLI Server" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/emp-web-v1/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2dc9c450-573d-4c00-b3d4-772c0aed2a5b" name="Default Changelist" comment="" />
+      <created>1598281539123</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1598281539123</updated>
+      <workItem from="1598281540724" duration="72000" />
+      <workItem from="1598281640399" duration="5000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+</project>

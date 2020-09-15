@@ -1,0 +1,258 @@
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel panel-heading">Gestion des avances Sur Salaire</div>
+    <div class="panel-body">
+      <button type="button" class="btn btn-default btn-sm" (click)="onGetList()">
+        <span class="glyphicon glyphicon-th-list"></span> Listes des avances Sur Salaire
+      </button>
+    </div>
+
+    <div class="panel-body">
+
+
+      <div *ngIf="mode == 'afficher'" >
+
+        <div class="row" style="margin-bottom: 15px;">
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">ID :</label>
+            <div class="col-sm-9">
+              {{item.idAvance}}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">valeur:</label>
+            <div class="col-sm-9">
+              {{item.valeur}}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">date_affectation:</label>
+            <div class="col-sm-9">
+              {{item.date_affectation}}
+            </div>
+          </div>
+
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">type:</label>
+            <div class="col-sm-9">
+              {{item.type}}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">mois:</label>
+            <div class="col-sm-9">
+              {{item.mois}}
+            </div>
+          </div>
+
+
+        </div>
+
+        <button class="btn btn-warning btn-sm" (click)="modifier(item)" > Modifier </button> &nbsp;
+        <button class="btn btn-danger btn-sm" (click)="supprimer(item)" > Supprimer</button>
+
+      </div> <!-- End afficher -->
+
+      <div *ngIf="mode == 'ajouter'">
+        <div class="submit-form">
+          <form #addForm="ngForm" class="form-horizontal">
+            <div *ngIf="!submitted">
+              <div class="form-row">
+
+
+                <div class="form-group col-sm-4" >
+                  <label for="valeur" class="col-sm-3 control-label" >valeur:</label>
+                  <div class="col-sm-9">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="valeur"
+                      required
+                      [(ngModel)]="item.valeur"
+                      name="valeur"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="date_affectation" class="col-sm-3 control-label" >date_affectation : </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="date"
+                      placeholder="Format JJ/MM/AAAA"
+                      class="form-control"
+                      [(ngModel)]="item.date_affectation"
+                      name="date_affectation"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-4" >
+                  <label for="type" class="col-sm-3 control-label" >type:</label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="type"
+                      required
+                      [(ngModel)]="item.type"
+                      name="type"
+                    />
+                  </div>
+                </div>
+                <div class="form-group col-sm-4" >
+                  <label for="mois" class="col-sm-3 control-label" >mois:</label>
+                  <div class="col-sm-9">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="mois"
+                      required
+                      [(ngModel)]="item.mois"
+                      name="type"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                  <div class="col-sm-offset-3 col-sm-10" >
+                    <button (click)="post()" class="btn btn-success" [disabled]="addForm.form.invalid">Ajouter</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div *ngIf="submitted" class="alert alert-success" role="alert">
+          ajout qve succes !
+        </div>
+      </div> <!-- End ajouter -->
+
+      <div *ngIf="mode == 'supprimer'">
+        <div class="alert alert-success" role="alert">
+           supprime avec succes !
+        </div>
+      </div>
+
+      <div *ngIf="mode == 'modifier'">
+        <div *ngIf="submitted" class="alert alert-success" role="alert">
+          il a ete mis a jour !
+        </div>
+
+        <div class="submit-form">
+          <div *ngIf="item">
+
+            <form #editForm="ngForm" class="form-horizontal">
+              <div class="form-row">
+
+                <div class="form-group col-sm-4" >
+                  <label for="valeur" class="col-sm-3 control-label" >valeur:</label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="valeur"
+                      required
+                      [(ngModel)]="item.valeur"
+                      name="valeur"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="date_affectation" class="col-sm-3 control-label" >date_affectation : </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="date"
+                      placeholder="Format JJ/MM/AAAA"
+                      class="form-control"
+                      id="date"
+                      [(ngModel)]="item.date_affectation"
+                      name="date_affectation"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-4" >
+                  <label for="type" class="col-sm-3 control-label" >type:</label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      required
+                      [(ngModel)]="item.type"
+                      name="type"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-4" >
+                  <label for="mois" class="col-sm-3 control-label" >mois:</label>
+                  <div class="col-sm-9">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="mois"
+                      required
+                      [(ngModel)]="item.mois"
+                      name="type"
+                    />
+                  </div>
+                </div>
+
+
+                <div class="form-group col-md-4">
+                  <div class="col-sm-offset-3 col-sm-10" >
+                    <button type="submit" (click)="put()" class="btn btn-success" [disabled]="editForm.form.invalid">Mettre A jour</button>
+                  </div>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="list && mode">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="grid-toolbar text-right" style="margin-bottom: 10px;">
+              <button type="button" class="btn btn-default" (click)="ajouter()">
+                <span class="glyphicon glyphicon-plus"></span> Ajouter
+              </button>
+            </div>
+            <div class="grid-toolbar text-right">
+              <button type="button" class="btn btn-default float-right" style="margin-bottom: 10px;"  (click)="onBtnExport()">
+                <span class="glyphicon glyphicon glyphicon-open" aria-hidden="true"></span> Exporter
+              </button>
+            </div>
+          </div>
+        </div>
+        <ag-grid-angular
+          #agGrid
+          style="width: 100%;"
+          class="ag-theme-alpine"
+          domLayout='autoHeight'
+          [rowData]="list"
+          [columnDefs]="columnDefs"
+          [context]="context"
+          [frameworkComponents]="frameworkComponents"
+          (gridReady)="onGridReady($event)"
+        >
+        </ag-grid-angular>
+      </div>
+
+    </div> <!-- End panel-body -->
+
+
+  </div> <!-- End panel-primary -->
+
+
+</div> <!-- End container -->
+
