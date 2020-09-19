@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-import { AgGridAngular } from 'ag-grid-angular';
-import { EmployesActionRendererComponent } from '../employes-action-renderer/employes-action-renderer.component';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {MatDialog} from '@angular/material/dialog';
+import {AgGridAngular} from 'ag-grid-angular';
+import {EmployesActionRendererComponent} from '../employes-action-renderer/employes-action-renderer.component';
 
 
 // @ts-ignore
@@ -16,27 +15,23 @@ export class EmployesComponent implements OnInit {
 
   //empoyees grid params
   @ViewChild('agGrid') agGrid: AgGridAngular;
-  private gridApi;
   public context;
   public frameworkComponents;
   public columnDefs;
   public employies: any;
   public employe: any;
-
   public submitted = false;
-
   public mode = 'lister'; //affichage, ajouter, modifier, supprimer
-
-
+  private gridApi;
 
   constructor(private httpClient: HttpClient, private dialog: MatDialog) {
 
     this.columnDefs = [
       {headerName: 'ID', field: 'idEmploye', sortable: true, filter: true},
-      {headerName: 'Nom', field: 'nom', sortable: true, filter: true },
-      {headerName: 'Prenom', field: 'prenom', sortable: true, filter: true },
-      {headerName: 'Contact', field: 'contact', sortable: true, filter: true },
-      {headerName: 'Titre', field: 'titre' , sortable: true, filter: true},
+      {headerName: 'Nom', field: 'nom', sortable: true, filter: true},
+      {headerName: 'Prenom', field: 'prenom', sortable: true, filter: true},
+      {headerName: 'Contact', field: 'contact', sortable: true, filter: true},
+      {headerName: 'Titre', field: 'titre', sortable: true, filter: true},
       {headerName: 'Adresse', field: 'adresse', hide: true},
       {headerName: 'Etat', field: 'etat', hide: true},
       {headerName: 'Situation Familialle', field: 'situationFamilialle', hide: true},
@@ -49,7 +44,7 @@ export class EmployesComponent implements OnInit {
       },
     ];
 
-    this.context = { componentParent: this };
+    this.context = {componentParent: this};
     this.frameworkComponents = {
       employesActionRenderer: EmployesActionRendererComponent,
     };
@@ -62,28 +57,28 @@ export class EmployesComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onGetEmployes() {
     this.mode = 'lister';
-this.httpClient.get('http://localhost:8181/listemployes')
-  .subscribe(data => {
-    this.employies = data;
-  }, err => {
-    console.log(err);
-  }, );
+    this.httpClient.get('http://localhost:8181/listemployes')
+      .subscribe(data => {
+        this.employies = data;
+      }, err => {
+        console.log(err);
+      },);
   }
 
-  getEmployes(){
+  getEmployes() {
     this.httpClient.get('http://localhost:8181/listemployes')
-    .subscribe(data => {
-      this.employies = data;
-    }, err => {
-      console.log(err);
-    }, );
+      .subscribe(data => {
+        this.employies = data;
+      }, err => {
+        console.log(err);
+      },);
   }
 
   onBtnExport() {
     let exportParams = {
-                          "fileName" : "employees.csv",
-                          "allColumns" : true
-                      }
+      "fileName": "employees.csv",
+      "allColumns": true
+    };
     this.gridApi.exportDataAsCsv(exportParams);
   }
 
@@ -96,29 +91,29 @@ this.httpClient.get('http://localhost:8181/listemployes')
     this.httpClient.post('http://localhost:8181/listemployes', this.employe)
       .subscribe(data => {
         //this.employer = data;
-        console.log("l'employee a ete ajouter !!")
+        console.log("l'employee a ete ajouter !!");
         this.submitted = true;
         this.refreshDataGrid();
       }, err => {
         console.log(err);
-      }, );
+      },);
   }
 
-  ajouter(){
-    this.mode = 'ajouter'
+  ajouter() {
+    this.mode = 'ajouter';
     this.submitted = false;
     this.employe = {
-      "nom" : '',
-      "prenom" : '',
-      "adresse" : "",
-      "contact" : "",
-      "etat" : 1,
-      "titre" : "",
-      "situationFamilialle" : "",
-      "email" : "",
-      "genre" : "femme",
-      "numeroCompte" : null,
-      "nni" : null
+      "nom": '',
+      "prenom": '',
+      "adresse": "",
+      "contact": "",
+      "etat": 1,
+      "titre": "",
+      "situationFamilialle": "",
+      "email": "",
+      "genre": "femme",
+      "numeroCompte": null,
+      "nni": null
     }
   }
 
@@ -128,21 +123,21 @@ this.httpClient.get('http://localhost:8181/listemployes')
   }
 
   modifier(employe) {
-    this.employe = employe
+    this.employe = employe;
     this.submitted = false;
     this.mode = 'modifier'
   }
 
   putEmployee() {
-    this.httpClient.put('http://localhost:8181/listemployes/'+this.employe.idEmploye, this.employe)
-    .subscribe(data => {
-      //this.employer = data;
-      console.log("l'employee a ete mis a jour !!")
-      this.submitted = true;
-      this.refreshDataGrid();
-    }, err => {
-      console.log(err);
-    }, );
+    this.httpClient.put('http://localhost:8181/listemployes/' + this.employe.idEmploye, this.employe)
+      .subscribe(data => {
+        //this.employer = data;
+        console.log("l'employee a ete mis a jour !!");
+        this.submitted = true;
+        this.refreshDataGrid();
+      }, err => {
+        console.log(err);
+      },);
   }
 
   supprimer(employe) {
@@ -164,20 +159,20 @@ this.httpClient.get('http://localhost:8181/listemployes')
   }
 
   deleteEmployee() {
-    this.httpClient.delete('http://localhost:8181/listemployes/'+this.employe.idEmploye)
-    .subscribe(data => {
-      //this.employer = data;
-      console.log("l'employe a ete supprimer !!")
-      this.submitted = true;
-      this.mode = 'supprimer'
-      this.refreshDataGrid();
-    }, err => {
-      this.submitted = false;
-      console.log(err);
-    }, );
+    this.httpClient.delete('http://localhost:8181/listemployes/' + this.employe.idEmploye)
+      .subscribe(data => {
+        //this.employer = data;
+        console.log("l'employe a ete supprimer !!");
+        this.submitted = true;
+        this.mode = 'supprimer';
+        this.refreshDataGrid();
+      }, err => {
+        this.submitted = false;
+        console.log(err);
+      },);
   }
 
-  refreshDataGrid(){
+  refreshDataGrid() {
     this.getEmployes();
     this.gridApi.refreshCells();
   }

@@ -32,7 +32,7 @@ public class Employe implements Serializable
   private double numeroCompte;
   private double nni;
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL)
   private List<Pointage> pointages;
 
   @OneToMany

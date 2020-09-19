@@ -23,6 +23,8 @@ import { LoginComponent } from './login/login.component';
 import { PrimesfixesComponent } from './primesfixes/primesfixes.component';
 import { PrimevariableComponent } from './primevariable/primevariable.component';
 import { PretsComponent } from './prets/prets.component';
+import {MultiSelectModule} from 'primeng/multiselect';
+import { EditComponent } from './pointage/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -42,11 +44,13 @@ import { PretsComponent } from './prets/prets.component';
     PrimesfixesComponent,
     PrimevariableComponent,
     PretsComponent,
+    EditComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,  ReactiveFormsModule, HttpClientModule, FormsModule, BrowserAnimationsModule, MatDialogModule,
-    AgGridModule.withComponents([EmployesActionRendererComponent])
+    AgGridModule.withComponents([EmployesActionRendererComponent]),
+    MultiSelectModule
   ],
   entryComponents: [
     ConfirmDialogComponent

@@ -3,8 +3,8 @@ import {AgGridAngular} from 'ag-grid-angular';
 import {HttpClient} from '@angular/common/http';
 import {MatDialog} from '@angular/material/dialog';
 import {EmployesActionRendererComponent} from '../employes-action-renderer/employes-action-renderer.component';
-import {UserService} from '../services/user.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {EditComponent} from './edit/edit.component';
 
 @Component({
   selector: 'app-pointage',
@@ -14,37 +14,35 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class PointageComponent implements OnInit {
 
   @ViewChild('agGrid') agGrid: AgGridAngular;
-  private gridApi;
   public context;
   public frameworkComponents;
   public columnDefs;
   public list: any;
   public item: any;
-  pointageForm: FormGroup;
-
-  private url  = 'http://localhost:8181/listPointee';
-
   public submitted = false;
-
   public mode = 'lister'; //affichage, ajouter, modifier, supprimer
-  employes: Object;
+  employes: any[];
+  private gridApi;
+  private url = 'http://localhost:8181/listPointee';
 
-  constructor(private httpClient: HttpClient, private dialog: MatDialog,private userService : UserService ,
-              private fb : FormBuilder)  {
-    this.buildForm();
+
+  constructor(private httpClient: HttpClient,
+              private fb: FormBuilder, public dialog: MatDialog) {
     this.columnDefs = [
-      {headerName: 'ID', field: 'employe.idEmploye', sortable: true, filter: true},
-      {headerName: 'heures_entree', field: 'heures_entree', sortable: true, filter: true },
+      {headerName: 'ID', field: 'idPointage', sortable: true, filter: true},
+      {headerName: 'employe', field: 'employe.nom', sortable: true, filter: true},
+      {headerName: 'heures_entree', field: 'heures_entree', sortable: true, filter: true},
       {headerName: 'heures_sortie', field: 'heures_sortie', sortable: true, filter: true},
-      {headerName: 'Date_Pointage', field: 'date_Pointage', sortable: true, filter: true,
+      {
+        headerName: 'Date_Pointage', field: 'date_Pointage', sortable: true, filter: true,
         cellRenderer: (data) => {
           return data.value ? (new Date(data.value)).toLocaleDateString() : '';
         }
       },
       {headerName: 'absence', field: 'absence', sortable: true, filter: true},
       {headerName: 'type_absence ', field: 'type_absence', sortable: true, filter: true},
-      {headerName: 'weekend', field: 'weekend', sortable: true, filter: true,hide:true},
-      {headerName: 'ferier', field: 'ferier', sortable: true, filter: true,hide:true},
+      {headerName: 'weekend', field: 'weekend', sortable: true, filter: true, hide: true},
+      {headerName: 'ferier', field: 'ferier', sortable: true, filter: true, hide: true},
 
       {
         headerName: 'Action',
@@ -52,39 +50,34 @@ export class PointageComponent implements OnInit {
       },
     ];
 
-    this.context = { componentParent: this };
+    this.context = {componentParent: this};
     this.frameworkComponents = {
       employesActionRenderer: EmployesActionRendererComponent,
     };
 
   }
 
-  ngOnInit(): void {
-    this.userService.getUsers().subscribe(value => {
-      this.employes = value;
-    }, error => {
-      console.log(error);
-    })
-  }
+  ngOnInit(): void {}
+
 
   onGetList() {
     this.mode = 'lister';
     this.getList();
   }
 
-  getList(){
+  getList() {
     this.httpClient.get(this.url)
       .subscribe(data => {
         this.list = data;
       }, err => {
         console.log(err);
-      }, );
+      },);
   }
 
   onBtnExport() {
     let exportParams = {
-      "fileName" : "export.csv",
-      "allColumns" : true
+      "fileName": "export.csv",
+      "allColumns": true
     }
     this.gridApi.exportDataAsCsv(exportParams);
   }
@@ -103,26 +96,37 @@ export class PointageComponent implements OnInit {
         this.refreshDataGrid();
       }, err => {
         console.log(err);
-      }, );
+      },);
   }
 
-  refreshDataGrid(){
+  refreshDataGrid() {
     this.getList();
     this.gridApi.refreshCells();
   }
 
-  ajouter(){
+  ajouter() {
     this.mode = 'ajouter'
     this.submitted = false;
     this.item = {
       heures_entree: "",
       heures_sortie: "",
-      Date_Pointage:"" ,
-      absence:"",
-      type_absence:"",
-      weekend:"",
-      ferier:""
-    }
+      Date_Pointage: "",
+      absence: "",
+      type_absence: "",
+      weekend: "",
+      ferier: "",
+      employe: null
+    };
+    const dialogRef = this.dialog.open(EditComponent, {
+      data: {
+        item: this.item,
+        btn: 'Ajouter'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.refreshDataGrid();
+    });
   }
 
   afficher(objet) {
@@ -134,18 +138,16 @@ export class PointageComponent implements OnInit {
     this.item = object
     this.submitted = false;
     this.mode = 'modifier'
-  }
+    const dialogRef = this.dialog.open(EditComponent, {
+      data: {
+        item: this.item,
+        btn: 'Mettre A jour'
+      }
+    });
 
-  put() {
-    this.httpClient.put(this.url + '/'+this.item.idPointage, this.item)
-      .subscribe(data => {
-        //this.employer = data;
-        console.log("il a ete mis a jour !!")
-        this.submitted = true;
-        this.refreshDataGrid();
-      }, err => {
-        console.log(err);
-      }, );
+    dialogRef.afterClosed().subscribe(result => {
+      this.refreshDataGrid();
+    });
   }
 
   supprimer(object) {
@@ -154,7 +156,7 @@ export class PointageComponent implements OnInit {
   }
 
   delete() {
-    this.httpClient.delete(this.url + '/'+this.item.idPointage)
+    this.httpClient.delete(this.url + '/' + this.item.idPointage)
       .subscribe(data => {
         //this.employer = data;
         console.log("l'object a ete supprimer !!")
@@ -164,12 +166,7 @@ export class PointageComponent implements OnInit {
       }, err => {
         this.submitted = false;
         console.log(err);
-      }, );
+      },);
   }
-  buildForm() {
-    this.pointageForm = this.fb.group({
-      emp: ['', Validators.required],
 
-    });
-  }
 }

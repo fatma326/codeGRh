@@ -1,0 +1,126 @@
+<div>
+
+  <div class="submit-form">
+    <div *ngIf="item">
+
+      <div class="form-horizontal">
+        <div class="form-row">
+
+          <div class="form-group col-sm-6" >
+            <label for="heures_entree" class="col-sm-3 control-label" >heures_entree:</label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id="heures_entree"
+                required
+                [(ngModel)]="item.heures_entree"
+              />
+            </div>
+          </div>
+
+          <div class="form-group col-sm-6" >
+            <label for="heures_sortie" class="col-sm-3 control-label" >heures_sortie: </label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id="heures_sortie"
+                [(ngModel)]="item.heures_sortie"
+                name="heures_sortie"
+              />
+            </div>
+          </div>
+
+          <div class="form-group col-sm-6" >
+            <label for="Date_Pointage" class="col-sm-3 control-label" >Date_Pointage: </label>
+            <div class="col-sm-9">
+              <input
+                id="Date_Pointage"
+                type="date"
+                placeholder="Format AAAA_MM_JJ"
+                class="form-control"
+                [(ngModel)]="item.date_Pointage"
+                name="Date_Pointage"
+              />
+            </div>
+          </div>
+
+          <div class="form-group col-sm-6" >
+            <label for="absence" class="col-sm-3 control-label" >absence: </label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id="absence"
+                [(ngModel)]="item.absence"
+                name="description"
+              />
+            </div>
+          </div>
+
+          <div class="form-group col-sm-6" >
+            <label for="type_absence" class="col-sm-3 control-label" >type_absence: </label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id="type_absence"
+                [(ngModel)]="item.type_absence"
+                name="demande_explication"
+              />
+            </div>
+          </div>
+
+          <div class="form-group col-sm-6" >
+            <label for="weekend" class="col-sm-3 control-label" >weekend: </label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id="weekend"
+                [(ngModel)]="item.weekend"
+                name="description"
+              />
+            </div>
+          </div>
+
+          <div class="form-group col-sm-6" >
+            <label for="ferier" class="col-sm-3 control-label" >ferier: </label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id="ferier"
+                [(ngModel)]="item.ferier"
+                name=""
+              />
+            </div>
+          </div>
+          <div class="form-group col-sm-6" >
+            <label  class="col-sm-3 control-label" >emp: </label>
+            <div class="col-sm-9">
+              <p-multiSelect
+                [options]="employes"
+                             optionLabel="nom"
+                            dataKey="idEmploye"
+                             [selectionLimit]="1"
+                             [(ngModel)]="employe">
+              </p-multiSelect>
+
+
+
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <div class="col-sm-offset-3 col-sm-10" >
+              <button type="submit" (click)="save()" class="btn btn-success" >{{data.btn}}</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

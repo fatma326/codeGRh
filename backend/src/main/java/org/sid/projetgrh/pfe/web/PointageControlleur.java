@@ -2,6 +2,7 @@ package org.sid.projetgrh.pfe.web;
 
 import org.sid.projetgrh.pfe.entities.Employe;
 import org.sid.projetgrh.pfe.entities.Pointage;
+import org.sid.projetgrh.pfe.service.EmployeRestService;
 import org.sid.projetgrh.pfe.service.PointageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,9 @@ public class PointageControlleur {
     @Autowired
     private PointageService pointgeService;
 
+    @Autowired
+    private EmployeRestService employeRestService;
+
     @GetMapping(value = "/listPointee")
     public List<Pointage> listPointee()
     {
@@ -27,9 +31,11 @@ public class PointageControlleur {
     }
 
     @PutMapping(value = "/listPointee/{idPointage}")
-    public Pointage  updateP(@PathVariable(name = "idPointage")long idPointage, @RequestBody Pointage Pn){
-        Pn.setIdPointage(idPointage);
-        return pointgeService.saveP(Pn);
+    public Pointage  updateP(@PathVariable(name = "idPointage")long idPointage, @RequestBody Pointage pn){
+        pn.setIdPointage(idPointage);
+        Employe employe = employeRestService.findByIdE(pn.getEmploye().getIdEmploye());
+        pn.setEmploye(employe);
+        return pointgeService.saveP(pn);
 
     }
     @GetMapping(value = "/listPointee/{idPointage}")

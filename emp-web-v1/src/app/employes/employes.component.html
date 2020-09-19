@@ -5,10 +5,6 @@
           <button type="button" class="btn btn-default btn-sm" (click)="onGetEmployes()">
             <span class="glyphicon glyphicon-th-list"></span> liste des employes
           </button><br><br>
-        <!--   <button class="btn btn-primary" (click)="onGetEmployes()">liste des employes</button><br><br>
-           <button class="btn btn-success" (click)="ajouterEmployer()"> Ajouter <i class="material-icons">add</i></button>
-          <button class="btn btn-primary" (click)="ajouterEmployer()"> Ajouter </button> -->
-
         </div>
         <div class="panel-body">
 
@@ -441,7 +437,7 @@
                     style="width: 100%;"
                     class="ag-theme-alpine"
                     domLayout='autoHeight'
-                    [rowData]="employies._embedded.employes"
+                    [rowData]="employies"
                     [columnDefs]="columnDefs"
                     [context]="context"
                     [frameworkComponents]="frameworkComponents"
