@@ -1,0 +1,7 @@
+.p-multiselect{
+  width: 100%!important;
+}
+
+p-multiselect::ng-deep .p-multiselect{
+  width: 100%!important;
+}

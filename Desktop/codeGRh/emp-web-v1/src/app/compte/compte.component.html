@@ -1,0 +1,188 @@
+
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel panel-heading">Gestion des Comptes</div>
+    <div class="panel-body">
+      <button type="button" class="btn btn-default btn-sm" (click)="onGetList()">
+        <span class="glyphicon glyphicon-th-list"></span> List Des Comptes
+      </button>
+    </div>
+
+    <div class="panel-body">
+
+      <div *ngIf="mode == 'afficher'" >
+
+        <div class="row" style="margin-bottom: 15px;">
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">Id:</label>
+            <div class="col-sm-9">
+              {{item.idCmpte}}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">Numero du Compte:</label>
+            <div class="col-sm-9">
+              {{item.numerCmpte}}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">Nom de la Banque:</label>
+            <div class="col-sm-9">
+              {{item.nomBanque}}
+            </div>
+          </div>
+
+          <mat-paginator [pageSizeOptions]="[5,10,20]" [PageSize]="5" ></mat-paginator>
+
+        </div>
+
+        <button class="btn btn-warning btn-sm" (click)="modifier(item)" > Modifier </button> &nbsp;
+        <button class="btn btn-danger btn-sm" (click)="supprimer(item)" > Supprimer</button>
+
+      </div> <!-- End afficher -->
+
+      <div *ngIf="mode == 'ajouter'">
+        <div class="submit-form">
+          <form #addForm="ngForm" class="form-horizontal">
+            <div *ngIf="!submitted">
+              <div class="form-row">
+
+                <div class="form-group col-sm-6" >
+                  <label for="numerCmpte" class="col-sm-3 control-label" >Numer du Cmpte:</label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="numerCmpte"
+                      required
+                      [(ngModel)]="item.numerCmpte"
+                      name="numerCmpte"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="nomBanque" class="col-sm-3 control-label" >Nom Banque: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nomBanque"
+                      [(ngModel)]="item.nomBanque"
+                      name="nomBanque"
+                    />
+                  </div>
+                </div>
+
+
+                <div class="form-group col-md-6">
+                  <div class="col-sm-offset-3 col-sm-10" >
+                    <button (click)="post()" class="btn btn-success" [disabled]="addForm.form.invalid">Ajouter</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div *ngIf="submitted" class="alert alert-success" role="alert">
+          ajout avec succes !
+        </div>
+      </div> <!-- End ajouter -->
+
+      <div *ngIf="mode == 'supprimer'">
+        <div class="alert alert-success" role="alert">
+           supprime avec succes !
+        </div>
+      </div>
+
+      <div *ngIf="mode == 'modifier'">
+        <div *ngIf="submitted" class="alert alert-success" role="alert">
+          il a ete mis a jour !
+        </div>
+
+        <div class="submit-form">
+          <div *ngIf="item">
+
+            <form #editForm="ngForm" class="form-horizontal">
+              <div class="form-row">
+
+                <div class="form-group col-sm-6" >
+                  <label for="numerCmpte" class="col-sm-3 control-label" >Numer du Cmpte:</label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="numerCmpte"
+                      required
+                      [(ngModel)]="item.numerCmpte"
+                      name="numerCmpte"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6" >
+                  <label for="nomBanque" class="col-sm-3 control-label" >Nom Banque: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nomBanque"
+                      [(ngModel)]="item.nomBanque"
+                      name="nomBanque"
+                    />
+                  </div>
+                </div>
+
+
+                <div class="form-group col-md-6">
+                  <div class="col-sm-offset-3 col-sm-10" >
+                    <button type="submit" (click)="put()" class="btn btn-success" [disabled]="editForm.form.invalid">Mettre A jour</button>
+                  </div>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="list && mode">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="grid-toolbar text-right" style="margin-bottom: 10px;">
+              <button type="button" class="btn btn-default" (click)="ajouter()">
+                <span class="glyphicon glyphicon-plus"></span> Ajouter
+              </button>
+            </div>
+            <div class="grid-toolbar text-right">
+              <button type="button" class="btn btn-default float-right" style="margin-bottom: 10px;"  (click)="onBtnExport()">
+                <span class="glyphicon glyphicon glyphicon-open" aria-hidden="true"></span> Exporter
+              </button>
+            </div>
+          </div>
+        </div>
+        <ag-grid-angular
+          #agGrid
+          style="width: 100%;"
+          class="ag-theme-alpine"
+          domLayout='autoHeight'
+          [rowData]="list"
+          [columnDefs]="columnDefs"
+          [context]="context"
+          [gridOptions]="gridOptins"
+        [frameworkComponents]="frameworkComponents"
+          (gridReady)="onGridReady($event)"
+        >
+        </ag-grid-angular>
+      </div>
+
+    </div> <!-- End panel-body -->
+
+
+  </div> <!-- End panel-primary -->
+
+
+</div> <!-- End container -->
+

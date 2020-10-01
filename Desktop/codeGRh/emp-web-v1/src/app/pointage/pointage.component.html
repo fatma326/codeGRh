@@ -1,0 +1,136 @@
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel panel-heading">Gestion des Pointages </div>
+    <div class="panel-body">
+      <button type="button" class="btn btn-default btn-sm" (click)="onGetList()">
+        <span class="glyphicon glyphicon-th-list"></span> List des Pointages
+      </button>
+    </div>
+
+    <div class="panel-body">
+
+      <div *ngIf="mode == 'afficher'" >
+
+        <div class="row" style="margin-bottom: 15px;">
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">Id:</label>
+            <div class="col-sm-9">
+              {{item.employe.nom}}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">heures_entree:</label>
+            <div class="col-sm-9">
+              {{item.heures_entree}}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">heures_sortie:</label>
+            <div class="col-sm-9">
+              {{item.heures_sortie}}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">Date_Pointage:</label>
+            <div class="col-sm-9">
+              {{item.Date_Pointage}}
+            </div>
+          </div>
+
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">absence:</label>
+            <div class="col-sm-9">
+              {{item.absence}}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">type_absence:</label>
+            <div class="col-sm-9">
+              {{item.type_absence}}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">weekend:</label>
+            <div class="col-sm-9">
+              {{item.weekend}}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">ferier:</label>
+            <div class="col-sm-9">
+              {{item.ferier}}
+            </div>
+          </div>
+
+
+        </div>
+
+        <button class="btn btn-warning btn-sm" (click)="modifier(item)" > Modifier </button> &nbsp;
+        <button class="btn btn-danger btn-sm" (click)="supprimer(item)" > Supprimer</button>
+
+        <!-- Example single danger button -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Action
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/avances">avance Sur Salaire</a>
+            <a class="dropdown-item" href="/comptes">compte</a>
+            <a class="dropdown-item" href="/prets">prets</a>
+          </div>
+        </div>
+
+
+
+
+
+      </div> <!-- End afficher -->
+
+      <div *ngIf="mode == 'supprimer'">
+        <div class="alert alert-success" role="alert">
+          l'element a ete supprime!
+        </div>
+      </div>
+
+
+      <div *ngIf="list && mode">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="grid-toolbar text-right" style="margin-bottom: 10px;">
+              <button type="button" class="btn btn-default" (click)="ajouter()">
+                <span class="glyphicon glyphicon-plus"></span> Ajouter
+              </button>
+            </div>
+            <div class="grid-toolbar text-right">
+              <button type="button" class="btn btn-default float-right" style="margin-bottom: 10px;"  (click)="onBtnExport()">
+                <span class="glyphicon glyphicon glyphicon-open" aria-hidden="true"></span> Exporter
+              </button>
+            </div>
+          </div>
+        </div>
+        <ag-grid-angular
+          #agGrid
+          style="width: 100%;"
+          class="ag-theme-alpine"
+          domLayout='autoHeight'
+          [rowData]="list"
+          [columnDefs]="columnDefs"
+          [context]="context"
+          [frameworkComponents]="frameworkComponents"
+          (gridReady)="onGridReady($event)"
+        >
+        </ag-grid-angular>
+      </div>
+
+    </div> <!-- End panel-body -->
+
+
+  </div> <!-- End panel-primary -->
+
+
+</div> <!-- End container -->

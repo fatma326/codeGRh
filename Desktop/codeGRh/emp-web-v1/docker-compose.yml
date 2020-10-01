@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+  emp-web:
+    container_name: emp-web-v1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - '4200:4200'
+    networks: 
+      - 'default'
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: GRH
+      MYSQL_USER: GRH
+      MYSQL_PASSWORD: test
+    networks: 
+       - 'default'
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links: 
+        - db:db
+    ports:
+        - 8000:80
+    environment:
+        MYSQL_USER: GRH
+        MYSQL_PASSWORD: test
+        MYSQL_ROOT_PASSWORD: test
+volumes: 
+  db_data:
