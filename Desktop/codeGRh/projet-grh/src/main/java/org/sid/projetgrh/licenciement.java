@@ -29,7 +29,7 @@ public class licenciement implements Serializable {
 
 
     @OneToOne
-    @JoinColumn(name = "employe_id")
+    @JoinColumn(name = "idEmploye")
     private Employe employe;
 
 }

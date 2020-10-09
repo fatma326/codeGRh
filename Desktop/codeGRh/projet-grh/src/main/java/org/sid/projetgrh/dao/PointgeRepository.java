@@ -8,12 +8,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin("*")
 @RepositoryRestResource
 public interface PointgeRepository extends JpaRepository<Pointage, Long> {
-    @Query("SELECT p from Pointage p where p.employe=?1")
-    List<Pointage> getPointageByEmploye(Employe e);
+
+    List<Pointage> findAllByEmploye(Employe e);
+    //List<Pointage> findAllByEmployeIdAndDate_Pointage(Long empId, Date date);
+ //   @Query("select sum (Pointage.HeureTotal) from Pointage where .......")
+    //Integer calculTotalHeure(Long empID, Date date);
 }
 

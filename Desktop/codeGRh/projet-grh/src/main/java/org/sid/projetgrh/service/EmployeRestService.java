@@ -4,16 +4,13 @@ import org.sid.projetgrh.Employe;
 import org.sid.projetgrh.Pointage;
 import org.sid.projetgrh.Primefixe;
 import org.sid.projetgrh.Primevariable;
-import org.sid.projetgrh.dao.EmployeRepository;
-import org.sid.projetgrh.dao.PointgeRepository;
-import org.sid.projetgrh.dao.PrimeFixeRep;
-import org.sid.projetgrh.dao.PrimeVarRep;
+import org.sid.projetgrh.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
 
 
 @RestController
@@ -25,10 +22,15 @@ public class EmployeRestService {
     @Autowired
     private PrimeVarRep primeVarRep;
     @Autowired
-    private PointgeRepository PointgeRepository;
+    private PointgeRepository pointgeRepository;
+
+    @Autowired
+    private CnssRepository cnssRepository;
+    @Autowired
+    private CnamRepository cnamRepository;
 
     @GetMapping(value = "/listemployes")
-    public List<Employe> listEmployes(){
+    public List<Employe> listEmployes() {
         List<Employe> employes = employeRepository.findAll();
         return employes;
     }
@@ -46,84 +48,81 @@ public class EmployeRestService {
        }
        
     }*/
-    
+
     @GetMapping(value = "/listemployes/{idEmploye}")
-    public Employe  listEmployes(@PathVariable(name = "idEmploye")long idEmploye){
+    public Employe listEmployes(@PathVariable(name = "idEmploye") long idEmploye) {
         return employeRepository.findById(idEmploye).get();
 
     }
 
-    @PutMapping (value = "/listemployes/{idEmploye}")
-    public Employe  update(@PathVariable(name = "idEmploye")long idEmploye,@RequestBody Employe p){
-       // p.setIdEmploye(idEmploye);
+    @PutMapping(value = "/listemployes/{idEmploye}")
+    public Employe update(@PathVariable(name = "idEmploye") long idEmploye, @RequestBody Employe p) {
+        // p.setIdEmploye(idEmploye);
         return employeRepository.save(p);
 
     }
 
     @CrossOrigin("http://localhost:4200")
-    @PostMapping (value = "/listemployes")
-    public Employe save(@RequestBody Employe p){
+    @PostMapping(value = "/listemployes")
+    public Employe save(@RequestBody Employe p) {
         return employeRepository.save(p);
     }
 
-    @DeleteMapping (value = "/listemployes/{idEmploye}")
-    public void delete(@PathVariable(name = "idEmploye")long idEmploye){
+    @DeleteMapping(value = "/listemployes/{idEmploye}")
+    public void delete(@PathVariable(name = "idEmploye") long idEmploye) {
 
         employeRepository.deleteById(idEmploye);
 
     }
 
     @GetMapping(value = "/bultinSalaire/{idEmploye}")
-    public HashMap  getBultinSalaire(@PathVariable(name = "idEmploye")long idEmploye){
-        HashMap res = new HashMap<String, Object>() ;
-        double salBase;
+    public HashMap getBultinSalaire(@PathVariable(name = "idEmploye") long idEmploye) {
+        Employe e = employeRepository.getOne(idEmploye);
+        List<Pointage> pointages = pointgeRepository.findAllByEmploye(e);
+        HashMap res = new HashMap<String, Object>();
 
-        Employe e = employeRepository.findById(idEmploye).get();
-        salBase = e.getSalBase();
+        double tauxHor = e.getSalBase() / (172.33);
 
-        int primesFixes = 0;
-        // TODO: where date in this month
-        List<Primefixe> primefixes = primeFixeRep.getPrimefixeByEmploye(e);
-        for (Primefixe pf: primefixes ) {
-            primesFixes += pf.getValeur_prime();
+        float sommeHeureNormale = 0;
+        float sommeHeureSup = 0;
+
+        for (Pointage p : pointages) {
+            long milliseconds1 = p.getHeures_entree().getTime();
+            long milliseconds2 = p.getHeures_sortie().getTime();
+
+            long diff = milliseconds2 - milliseconds1;
+            long diffSeconds = diff / 1000;
+            long diffMinutes = diff / (60 * 1000);
+            long diffHours = diff / (60 * 60 * 1000);
+
+            sommeHeureNormale += diffHours;
+            sommeHeureSup += p.getHeursSup();
         }
 
-        int Pointage = 0;
-        List<Pointage> Pointages = PointgeRepository.getPointageByEmploye(e);
-        for(Pointage p: Pointages) {
-            Pointage += p.getHeures_entree();
-            Pointage += p.getHeures_sortie();
+        double mntPointage = sommeHeureNormale / tauxHor;
 
+        double sommePrime = e.getPrimefixe().get(0).getValeur_prime() + e.getPrimevariable().get(0).getValeur_prime();
 
+        double sommeGain = sommePrime + mntPointage;
+        double primeSalBase = sommePrime + e.getSalBase();
+        double cnam = (4 * primeSalBase) / 100;
 
-     }
+        double plafondSalCnss = cnssRepository.getOne(Long.parseLong("1")).getPlafondSalarial();
 
-        int primesVariable = 0;
-        List<Primevariable> primevariables = primeVarRep.getPrimevariableByEmploye(e);
-        for(Primevariable pv: primevariables) {
-            primesVariable += pv.getValeur_prime();
+        int nbrPlafondInSal = (int) (e.getSalBase() / plafondSalCnss);
 
+        double percentCnss = cnssRepository.getOne(Long.parseLong("1")).getPourcentageCnss();
+
+        double sommeMntCnss = 0;
+
+        if (e.getSalBase() > plafondSalCnss) {
+            sommeMntCnss = nbrPlafondInSal * (percentCnss * plafondSalCnss);
         }
 
-
-        int pret = 0;
-        int avanceSurSalaire = 0;
-        int cnam = 1500;
-        int cnss = 1200;
-        int its = 2000;
-        int ancienete = 0;
-
-        res.put("idUser", idEmploye);
-        res.put("salBase", salBase);
-        res.put("primesFixes", primesFixes);
-        res.put("primesVariable", primesVariable);
-        res.put("heuresSupp", Pointage);
-        res.put("pret", pret);
-        res.put("avanceSurSalaire", avanceSurSalaire);
-        res.put("cnam", cnam);
-        res.put("cnss", cnss);
-        res.put("its", its);
-        res.put("ancienete", ancienete);
+        res.put("montant cnss à payer", sommeMntCnss);
+        res.put("montant cnam à payer", cnam);
+        res.put("montant primes", sommePrime);
+        res.put("salaireBrut", mntPointage);
         return res;
     }
 

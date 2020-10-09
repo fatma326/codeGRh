@@ -1,0 +1,47 @@
+       //Integer heureSup = PointgeRepository.calculTotalHeure(idEmploye,new Date());
+
+        HashMap res = new HashMap<String, Object>() ;
+        double salBase=200000;
+
+        Employe e = employeRepository.findById(idEmploye).get();
+        salBase = e.getSalBase();
+
+        int primesFixes = 300;
+        // TODO: where date in this month
+        List<Primefixe> primefixes = primeFixeRep.getPrimefixeByEmploye(e);
+        for (Primefixe pf: primefixes ) {
+            primesFixes += pf.getValeur_prime();
+        }
+
+        int Pointage = 12;
+        List<Pointage> Pointages = PointgeRepository.getPointageByEmploye(e);
+        for(Pointage p: Pointages) {
+            Pointage += p.getHeures_entree();
+            Pointage += p.getHeures_sortie();
+     }
+
+        int primesVariable = 2000;
+        List<Primevariable> primevariables = primeVarRep.getPrimevariableByEmploye(e);
+        for(Primevariable pv: primevariables) {
+            primesVariable += pv.getValeur_prime();
+
+        }
+        
+        int pret = 300;
+        int avanceSurSalaire = 0;
+        int cnam = 1500;
+        int cnss = 1200;
+        int its = 2000;
+        int ancienete = 0;
+
+        res.put("idUser", idEmploye);
+        res.put("salBase", salBase);
+        res.put("primesFixes", primesFixes);
+        res.put("primesVariable", primesVariable);
+        res.put("heuresSupp", Pointage);
+        res.put("pret", pret);
+        res.put("avanceSurSalaire", avanceSurSalaire);
+        res.put("cnam", cnam);
+        res.put("cnss", cnss);
+        res.put("its", its);
+        res.put("ancienete", ancienete);

@@ -7,6 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +18,7 @@ import java.util.List;
 public class ProjetGrhApplication implements CommandLineRunner{
 
   @Autowired
-    private EmployeRepository EmployeRepository;
+  private EmployeRepository EmployeRepository;
   @Autowired
   private DisplineRepository DisplineRepository;
   @Autowired
@@ -38,15 +41,14 @@ public class ProjetGrhApplication implements CommandLineRunner{
   private CongesRepository CongesRepository;
   @Autowired
   private licenciementRepository licenciementRepository;
-    @Autowired
-    private ContratsRepository ContratsRepository;
-    @Autowired
-    private derpartementRepository derpartementRepository;
-    @Autowired
+  @Autowired
+  private ContratsRepository ContratsRepository;
+  @Autowired
+  private derpartementRepository derpartementRepository;
+  @Autowired
   private RepositoryRestConfiguration restConfiguration;
-
-
-
+  @Autowired
+  private PointgeRepository PointgeRepository;
 
 
     public static void main(String[] args) {
@@ -143,8 +145,7 @@ public class ProjetGrhApplication implements CommandLineRunner{
 
         restConfiguration.exposeIdsFor(CNAM.class);
 
-        CnamRepository.save(new CNAM(1,25,200000));
-        CnamRepository.save(new CNAM(2,5,900000));
+        CnamRepository.save(new CNAM(1,Float.parseFloat("0.04"), 0.0));
         CnamRepository.findAll().forEach(n->{System.out.println((n.toString()));});
 
 
@@ -152,8 +153,7 @@ public class ProjetGrhApplication implements CommandLineRunner{
 
         restConfiguration.exposeIdsFor(CNSS.class);
 
-        CnssRepository.save(new CNSS(1,5,600000));
-        CnssRepository.save(new CNSS(2,9,1900000));
+        CnssRepository.save(new CNSS(1,Float.parseFloat("0.01"),7000));
         CnssRepository.findAll().forEach(s->{System.out.println((s.toString()));});
 
 
@@ -201,6 +201,16 @@ public class ProjetGrhApplication implements CommandLineRunner{
         derpartementRepository.save(new Departement(1,"informatique", null, null, null, null));
         derpartementRepository.save(new Departement(2,"finance", null, null, null, null));
         derpartementRepository.findAll().forEach(s->{System.out.println((s.toString()));});
+
+//pointage
+        restConfiguration.exposeIdsFor(Pointage.class);
+        long l = 1;
+        Employe e=EmployeRepository.getOne(l);
+
+        PointgeRepository.save(new Pointage(2,null,Timestamp.valueOf("2020-10-10 08:20:00.123456789"),Timestamp.valueOf("2020-10-10 16:20:00.123456789"),"absence","justifie",7,20, 80, e));
+        PointgeRepository.findAll().forEach(s->{System.out.println((s.toString()));});
+
+
 
 
 

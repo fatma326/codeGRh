@@ -33,11 +33,11 @@ public class Departement implements Serializable {
     private Departement departement_parent;  
 
     @ManyToOne
-    @JoinColumn(name="type_departement_id")
+    @JoinColumn(name="idType")
     private Type_departement type_departement;  
 
     @ManyToOne
-    @JoinColumn(name="profession_id")
+    @JoinColumn(name="idProfession")
     private Profession profession;  
 
     @OneToMany(mappedBy = "departement")

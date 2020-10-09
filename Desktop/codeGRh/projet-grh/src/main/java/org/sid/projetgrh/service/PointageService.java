@@ -24,6 +24,7 @@ public class PointageService {
     }
 
     public Pointage updateP(long idPointage, @RequestBody Pointage Pn){
+     //   Pn.setHeureTotal((float) (Pn.getHeures_sortie() - Pn.getHeures_entree()));
         return pointgeRepository.save(Pn);
 
     }

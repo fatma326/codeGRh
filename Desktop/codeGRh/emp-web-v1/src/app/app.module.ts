@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployesComponent } from './employes/employes.component';
 import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RechercheEmployeComponent } from './recherche-employe/recherche-employe.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
@@ -67,6 +67,7 @@ import { PrimevariableComponent } from './primevariable/primevariable.component'
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule, HttpClientModule, FormsModule, BrowserAnimationsModule, MatDialogModule,
     AgGridModule.withComponents([EmployesActionRendererComponent])
   ],
