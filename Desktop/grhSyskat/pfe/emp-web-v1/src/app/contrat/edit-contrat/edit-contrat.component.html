@@ -1,0 +1,90 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="item">
+      <div class="form-horizontal">
+        <div class="form-row">
+
+
+          <div class="form-group col-sm-6" >
+            <label for="Date_Pointage" class="col-sm-3 control-label" >date_emabauche: </label>
+            <div class="col-sm-9">
+              <input
+                id="date_emabauche"
+                type="date"
+                placeholder="Format AAAA_MM_JJ"
+                class="form-control"
+                [(ngModel)]="item.date_emabauche"
+                name="date_emabauche"
+              />
+            </div>
+          </div>
+
+          <div class="form-group col-sm-6" >
+            <label for="mode_reglement" class="col-sm-3 control-label" >mode_reglement: </label>
+            <div class="col-sm-9">
+              <select
+                class="form-control"
+                name="mode_reglement"
+                id="mode_reglement"
+                [(ngModel)]="item.mode_reglement">
+              <option value="caisse" >Caisse</option>
+              <option value="cheque" >Cheque</option>
+              </select>
+            </div>
+          </div>
+
+
+
+          <div class="form-group col-sm-6" >
+            <label for="salaire_base" class="col-sm-3 control-label" >salaire_base: </label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id="salaire_base"
+                [(ngModel)]="item.salaire_base"
+                name="salaire_base"
+              />
+            </div>
+          </div>
+
+
+          <div class="form-group col-sm-6" >
+            <label  class="col-sm-3 control-label" >employe: </label>
+            <div class="col-sm-9">
+              <p-multiSelect
+                [options]="employes"
+                optionLabel="nom"
+                dataKey="idEmploye"
+                [selectionLimit]="1"
+                [(ngModel)]="employe">
+              </p-multiSelect>
+            </div>
+          </div>
+
+          <div class="form-group col-sm-6" >
+            <label  class="col-sm-3 control-label" >type contrat: </label>
+            <div class="col-sm-9">
+              <p-multiSelect
+                [options]="typeCons"
+                optionLabel="type"
+                dataKey="id"
+                [selectionLimit]="1"
+                [(ngModel)]="typeCon">
+              </p-multiSelect>
+            </div>
+          </div>
+
+
+
+          <div class="form-group col-md-6">
+            <div class="col-sm-offset-3 col-sm-10" >
+              <button type="submit" (click)="post()" class="btn btn-success" >{{data.btn}}</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

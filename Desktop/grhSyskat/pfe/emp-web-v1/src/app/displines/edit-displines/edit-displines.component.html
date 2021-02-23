@@ -1,0 +1,111 @@
+<div>
+  <div class="submit-form">
+    <form #addForm="ngForm" class="form-horizontal">
+      <div class="form-row">
+
+      <div class="form-group col-sm-6" >
+          <label for="typeDispline" class="col-sm-3 control-label" >type:</label>
+          <div class="col-sm-9">
+            <select
+              class="form-control"
+              id="typeDispline"
+              name="typeDispline"
+              required
+              [(ngModel)]="item.typeDispline">
+              <option value="l'avertissement écrit">l'avertissement écrit</option>
+              <option value="la mise à pied de 1" >la mise à pied de 1 </option>
+              <option value="la mise à pied de 2">la mise à pied de 2</option>
+              <option value="le licenciement">le licenciement</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6" >
+          <label for="date" class="col-sm-3 control-label" >Date:</label>
+          <div class="col-sm-9">
+            <input
+              placeholder="Format JJ/MM/AAAA"
+              type="date"
+              class="form-control"
+              id="date"
+              [(ngModel)]="item.date"
+              name="date"
+            />
+          </div>
+        </div>
+
+        <div class="form-group col-sm-6" >
+          <label for="nomSuperviseur" class="col-sm-3 control-label">Nom Superviseur:</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              id="nomSuperviseur"
+              required
+              [(ngModel)]="item.nomSuperviseur"
+              name="nomSuperviseur"
+            />
+          </div>
+        </div>
+
+
+
+
+        <div class="form-group col-sm-6">
+          <label for="description" class="col-sm-3 control-label" >Description:</label>
+          <div class="col-sm-9">
+            <textarea
+              class="form-control"
+              id="description"
+              name="description"
+              required
+              [(ngModel)]="item.description"></textarea>
+          </div>
+        </div>
+
+
+
+        <div class="form-group col-sm-6">
+          <label for="description" class="col-sm-3 control-label" >Demande d'explication:</label>
+          <div class="col-sm-9">
+            <textarea
+              class="form-control"
+              id="demande_explication"
+              name="demande_explication"
+              required
+              [(ngModel)]="item.demande_explication"></textarea>
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6" >
+          <label  class="col-sm-3 control-label" >employe: </label>
+          <div class="col-sm-9">
+            <p-multiSelect
+              [options]="employes"
+              optionLabel="nom"
+              dataKey="idEmploye"
+              [selectionLimit]="1"
+              [(ngModel)]="employe">
+            </p-multiSelect>
+          </div>
+        </div>
+
+
+
+        <div class="form-group col-sm-6">
+          <div class="col-sm-offset-3 col-sm-10" >
+            <button (click)="post()" class="btn btn-success" [disabled]="addForm.form.invalid">{{data.btn}}</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="submitted" class="alert alert-success" role="alert">
+    displines a ete ajoute !
+  </div>
+</div> <!-- End ajouter -->
+

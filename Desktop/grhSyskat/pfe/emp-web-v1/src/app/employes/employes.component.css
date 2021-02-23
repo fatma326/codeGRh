@@ -1,0 +1,44 @@
+.table-borderless td,
+.table-borderless th {
+  border: 0;
+}
+.panel.panel-primary {
+  margin-top: 60px;
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+.card-footer > a{
+  width: 100%;
+}
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+
+
+footer {
+  color: #caced1 !important
+}
+
+li {
+  margin-top: 20px;
+  margin-bottom: 20px
+}
+
+.Careers {
+  cursor: pointer;
+  color: #1E88E5
+}
+
+.row-1 {
+  background-color: #1E242A !important
+}
+
+.row-2 {
+  background-color: #28323C !important
+}

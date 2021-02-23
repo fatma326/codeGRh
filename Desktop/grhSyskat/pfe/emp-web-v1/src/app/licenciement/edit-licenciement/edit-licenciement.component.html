@@ -1,0 +1,65 @@
+<div>
+  <div class="submit-form">
+    <form #addForm="ngForm" class="form-horizontal">
+      <div class="form-row">
+
+        <div class="form-group col-sm-6" >
+          <label for="date" class="col-sm-3 control-label" >Date: </label>
+          <div class="col-sm-9">
+            <input
+              id="date"
+              type="date"
+              placeholder="Format AAAA_MM_JJ"
+              class="form-control"
+              [(ngModel)]="item.date"
+              name="date"
+            />
+          </div>
+        </div>
+
+
+
+        <div class="form-group col-sm-6">
+          <label for="nature_sanction" class="col-sm-3 control-label" >Nature Sanction:</label>
+          <div class="col-sm-9">
+            <textarea
+              class="form-control"
+              id="nature_sanction"
+              name="nature_sanction"
+              required
+              [(ngModel)]="item.nature_sanction"></textarea>
+          </div>
+        </div>
+
+
+
+        <div class="form-group col-sm-6" >
+          <label  class="col-sm-3 control-label" >employe: </label>
+          <div class="col-sm-9">
+            <p-multiSelect
+              [options]="employes"
+              optionLabel="nom"
+              dataKey="idEmploye"
+              [selectionLimit]="1"
+              [(ngModel)]="employe">
+            </p-multiSelect>
+          </div>
+        </div>
+
+
+
+        <div class="form-group col-sm-6">
+          <div class="col-sm-offset-3 col-sm-10" >
+            <button (click)="post()" class="btn btn-success" [disabled]="addForm.form.invalid">{{data.btn}}</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="submitted" class="alert alert-success" role="alert">
+    licenciement a ete ajoute !
+  </div>
+</div> <!-- End ajouter -->
+

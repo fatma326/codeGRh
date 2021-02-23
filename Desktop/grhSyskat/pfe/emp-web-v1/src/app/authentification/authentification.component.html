@@ -1,0 +1,56 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="assets/img/padlock.png" style="height:80px; width:80px;" id="icon" alt="User Icon"/>
+    </div>
+
+    <!-- Login Form -->
+
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+
+        <div class="form-group">
+          <label for="login"></label>
+          <i class="fa fa-user icon"></i>
+          <input
+            type="text"
+            class="form-control"
+            id="login"
+            required
+            placeholder="nom d'utilisateur"
+            [(ngModel)]="employer.username"
+            name="login"
+          />
+
+        </div>
+
+        <div class="form-group">
+          <label for="password"></label>
+          <i class="fa fa-key icon"></i>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="mot de passe"
+            required
+            [(ngModel)]="employer.password"
+            name="password"
+          />
+        </div>
+
+        <button (click)="login()" class="btn btn-info">Login</button>
+
+      </div>
+
+      <div id="formFooter">
+      </div>
+
+      <div *ngIf="submitted" class="alert alert-success" role="alert">
+        avance sur salaire  a ete ajoute !
+      </div>
+    </div>
+  </div>
+</div>
+

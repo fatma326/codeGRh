@@ -1,0 +1,52 @@
+<div>
+  <div class="submit-form">
+    <form #addForm="ngForm" class="form-horizontal">
+      <div class="form-row">
+
+        <div class="form-group col-sm-6" >
+          <label for="numero" class="col-sm-3 control-label" >Numero:</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              id="numero"
+              required
+              [(ngModel)]="item.numero"
+              name="numero"
+            />
+          </div>
+        </div>
+
+
+
+        <div class="form-group col-sm-6" >
+          <label for="type" class="col-sm-3 control-label" >type:</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              id="type"
+              required
+              [(ngModel)]="item.type"
+              name="type"
+            />
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6">
+          <div class="col-sm-offset-3 col-sm-10" >
+            <button (click)="post()" class="btn btn-success" [disabled]="addForm.form.invalid">{{data.btn}}</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="submitted" class="alert alert-success" role="alert">
+    type contrat a ete ajoute !
+  </div>
+</div> <!-- End ajouter -->
+
+

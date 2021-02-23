@@ -1,0 +1,252 @@
+<div class="content-wrapper">
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel panel-heading">ITS</div>
+    <div class="panel-body">
+      <button  *ngIf="!list;" type="button" class="btn btn-default btn-sm" (click)="onGetList()">
+        <span class="glyphicon glyphicon-th-list"></span> Liste des ITS
+      </button>
+    </div>
+
+    <div class="panel-body">
+
+
+      <div *ngIf="mode == 'afficher'" >
+
+        <div class="row" style="margin-bottom: 15px;">
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">Id :</label>
+            <div class="col-sm-9">
+              {{item.idIts}}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label">pourcentage Its:</label>
+            <div class="col-sm-9">
+              {{item.pourcentageIts}}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="col-sm-3 control-label"> abattement:</label>
+            <div class="col-sm-9">
+              {{item.abattement}}
+            </div>
+          </div>
+
+
+          <mat-paginator [pageSizeOptions]="[5,10,20]" [PageSize]="5" ></mat-paginator>
+
+
+
+        </div>
+
+        <button class="btn btn-warning btn-sm" (click)="modifier(item)" > Modifier </button> &nbsp;
+        <button class="btn btn-danger btn-sm" (click)="supprimer(item)" > Supprimer</button>
+
+      </div> <!-- End afficher -->
+
+      <div *ngIf="mode == 'ajouter'">
+        <div class="submit-form">
+          <form #addForm="ngForm" class="form-horizontal">
+            <div *ngIf="!submitted">
+              <div class="form-row">
+
+                <div class="form-group col-sm-4" >
+                  <label for="pourcentageIts" class="col-sm-3 control-label" >pourcentage Its:</label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="pourcentageIts"
+                      required
+                      [(ngModel)]="item.pourcentageIts"
+                      name="pourcentageIts"
+                    />
+                  </div>
+                </div>
+
+
+                <div class="form-group col-sm-6" >
+                  <label for="abattement" class="col-sm-3 control-label" >abattement: </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="abattement"
+                      [(ngModel)]="item.abattement"
+                      name="abattement"
+                    />
+                  </div>
+                </div>
+
+
+
+
+
+                <div class="form-group col-md-4">
+                  <div class="col-sm-offset-3 col-sm-10" >
+                    <button (click)="post()" class="btn btn-success" [disabled]="addForm.form.invalid">Ajouter</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div *ngIf="submitted" class="alert alert-success" role="alert">
+          its a ete ajoute !
+        </div>
+      </div> <!-- End ajouter -->
+
+
+
+
+      <div *ngIf="mode == 'supprimer'">
+        <div class="alert alert-success" role="alert">
+          its a ete supprime!
+        </div>
+      </div>
+
+      <div *ngIf="mode == 'modifier'">
+        <div *ngIf="submitted" class="alert alert-success" role="alert">
+          its a ete mis a jour !
+        </div>
+
+        <div class="submit-form">
+          <div *ngIf="item">
+
+            <form #editForm="ngForm" class="form-horizontal">
+
+              <div class="form-row">
+                <div class="form-group col-sm-4" >
+                  <label for="pourcentageIts" class="col-sm-3 control-label" >pourcentageIts:</label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="pourcentageIts"
+                      required
+                      [(ngModel)]="item.pourcentageIts"
+                      name="pourcentageIts"
+                    />
+                  </div>
+                </div>
+
+
+                <div class="form-group col-sm-4" >
+                  <label for="abattement" class="col-sm-3 control-label" >abattement:</label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="abattement"
+                      required
+                      [(ngModel)]="item.abattement"
+                      name="abattement"
+                    />
+                  </div>
+                </div>
+
+
+
+                <div class="form-group col-md-4">
+                  <div class="col-sm-offset-3 col-sm-10" >
+                    <button type="submit" (click)="put()" class="btn btn-success" [disabled]="editForm.form.invalid">Mettre A jour</button>
+                  </div>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="list && mode">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="grid-toolbar text-right" style="margin-bottom: 10px;">
+              <button type="button" class="btn btn-default" (click)="ajouter()">
+                <span class="glyphicon glyphicon-plus"></span> Ajouter
+              </button>
+            </div>
+            <div class="grid-toolbar text-right">
+              <button type="button" class="btn btn-default float-right" style="margin-bottom: 10px;"  (click)="onBtnExport()">
+                <span class="glyphicon glyphicon glyphicon-open" aria-hidden="true"></span> Exporter
+              </button>
+            </div>
+          </div>
+        </div>
+        <ag-grid-angular
+          #agGrid
+          style="width: 100%;"
+          class="ag-theme-alpine"
+          domLayout='autoHeight'
+          [rowData]="list"
+          [columnDefs]="columnDefs"
+          [context]="context"
+          [gridOptions]="gridOptins"
+          [frameworkComponents]="frameworkComponents"
+          (gridReady)="onGridReady($event)"
+        >
+        </ag-grid-angular>
+      </div>
+
+    </div> <!-- End panel-body -->
+
+
+  </div> <!-- End panel-primary -->
+
+
+</div> <!-- End container -->
+
+
+
+</div>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><Br><BR><BR><br>
+<footer>
+  <div class="row justify-content-center mb-0 pt-5 pb-0 row-2 px-3">
+    <div class="col-12">
+      <div class="row row-2">
+        <div class="col-sm-3 text-md-center">
+          <img src="assets/img/sy.PNG" style=" width: 120px !important; height:40px">
+          <h5><span> <i class="fa fa-firefox text-light" aria-hidden="true"></i></span>
+            <b>Syskat Technologies</b></h5>
+        </div>
+        <div class="col-sm-3 my-sm-0 mt-5">
+          <ul class="list-unstyled">
+            <li class="mt-0">Hébergement site web</li>
+            <li>Maintenance</li>
+            <li>Securité</li>
+          </ul>
+        </div>
+        <div class="col-sm-3 my-sm-0 mt-5">
+          <ul class="list-unstyled">
+            <li class="mt-0">Solutions</li>
+            <li>Services</li>
+            <li>Références</li>
+          </ul>
+        </div>
+        <div class="col-sm-3 my-sm-0 mt-5">
+          <ul class="list-unstyled">
+            <li class="mt-0">Développement sur mesure</li>
+            <li><i style='font-size:24px' class='fas'>&#xf3c5;</i>Avn. Mokhtar Ould Daddah</li>
+            <li><i class="fas fa-phone-alt"></i>+222 44 24 48 48</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-0 pt-0 row-1 mb-0 px-sm-3 px-2">
+    <div class="col-12">
+      <div class="row my-4 row-1 no-gutters">
+        <div class="col-sm-3 col-auto text-center"><small>&#9400; Syskat Technologies</small></div>
+        <div class="col-md-3 col-auto "></div>
+        <div class="col-md-3 col-auto"></div>
+        <div class="col my-auto text-md-left text-right "><i class="fas fa-comment"></i> <small> Contact@syskat.com </small> </div>
+      </div>
+    </div>
+  </div>
+</footer>

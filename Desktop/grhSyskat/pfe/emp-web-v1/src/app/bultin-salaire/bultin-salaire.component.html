@@ -1,0 +1,234 @@
+<div class="content-wrapper">
+  <div class="container">
+    <div class="panel panel-info">
+      <div class="panel panel-heading">bulletin de salaire</div>
+
+      <div class="panel-body">
+        <div class="form-group col-sm-4">
+          <label class="col-sm-3 control-label">employe: </label>
+          <div class="col-sm-9">
+            <p-multiSelect
+              [options]="employes"
+              optionLabel="nom"
+              dataKey="idEmploye"
+              [selectionLimit]="1"
+              [(ngModel)]="employe">
+            </p-multiSelect>
+          </div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="col-sm-3 control-label">matricule: </label>
+          <div class="col-sm-9">
+            <p-multiSelect
+              [options]="employes"
+              optionLabel="matricule"
+              dataKey="idEmploye"
+              [selectionLimit]="1"
+              [(ngModel)]="employe">
+            </p-multiSelect>
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-4">
+          <label class="col-sm-3 control-label">Date: </label>
+          <div class="col-sm-9">
+            <input type="date" [(ngModel)]="date" >
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-4">
+          <button type="submit" (click)="getData()" class="btn btn-info"> Afficher </button>
+        </div>
+
+        <span *ngIf="error"> {{error}} </span>
+      </div></div>
+        <div *ngIf="bl" id="print-section">
+
+          <div class="row" style="margin-bottom: 15px;">
+
+            <header class="clearfix">
+              <div id="logo">
+                <img src="assets/img/Image1.png" style="height:80px; width:100px;">
+              </div>
+              <h1>bulletin salaire</h1>
+              <div id="company" class="clearfix">
+                <div>Syskat technologies</div>
+                <div>Avn. Mokhtar Ould Daddah,<br /></div>
+                <div>+222 44 24 48 48</div>
+                <div><a href="email:contact@syskat.com">contact@syskat.com</a></div>
+              </div>
+
+             <ng-container  *ngIf="employe.length">
+
+              <div>
+                  <div class="col-md-4">
+                    <label class="col-sm-3 control-label">Nom:</label>
+                    <div class="col-sm-9">
+                      {{employe[0].nom}}
+                    </div>
+                  </div>
+                </div>
+
+               <div>
+                 <div class="col-md-4">
+                   <label class="col-sm-3 control-label">Adresse:</label>
+                   <div class="col-sm-9">
+                     {{employe[0].adresse}}
+                   </div>
+                 </div>
+               </div>
+
+               <div>
+                 <div class="col-md-4">
+                   <label class="col-sm-3 control-label">Contact:</label>
+                   <div class="col-sm-9">
+                     {{employe[0].contact}}
+                   </div>
+                 </div>
+               </div>
+
+               <div>
+                 <div class="col-md-4">
+                   <label class="col-sm-3 control-label">Email:</label>
+                   <div class="col-sm-9">
+                     {{employe[0].email}}
+                   </div>
+                 </div>
+               </div>
+
+               <div>
+                 <div class="col-md-4">
+                   <label class="col-sm-3 control-label">Compte:</label>
+                   <div class="col-sm-9">
+                     {{employe[0].numeroCompte}}
+                   </div>
+                 </div>
+               </div>
+
+               <div>
+                 <div class="col-md-4">
+                   <label class="col-sm-3 control-label">NNI:</label>
+                   <div class="col-sm-9">
+                     {{employe[0].nni}}
+                   </div>
+                 </div>
+               </div>
+             </ng-container>
+
+            </header>
+
+            <table class="table table-striped">
+              <tbody>
+              <tr>
+                <th scope="row">Heure Total:</th>
+                <td>{{bl.heureTotal}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Heure Normale:</th>
+                <td>{{bl.heureNormale}}</td>
+              </tr>
+
+
+              <tr>
+                <th scope="row">Heure supplémentaire:</th>
+                <td> {{bl.heureSup}}</td>
+              </tr>
+
+
+
+              <tr>
+                <th scope="row">Total a payer:</th>
+                <td> {{bl.total}}</td>
+              </tr>
+
+
+
+              <tr>
+                <th scope="row">Heure supplémentaire Prix:</th>
+                <td>{{bl.heureSupPrix}}</td>
+              </tr>
+
+              <tr>
+                <th scope="row">montant Payer:</th>
+                <td>{{bl.montantPayer}}</td>
+              </tr>
+
+
+
+              <tr>
+                <th scope="row"> plafond Salarial Cnss:</th>
+                <td>{{bl.plafondSalCnss}}</td>
+              </tr>
+
+              <tr>
+                <th scope="row"> montant Cnam:</th>
+                <td>{{bl.montantCnam}}</td>
+              </tr>
+
+
+              <tr>
+                <th scope="row">montant Primes:</th>
+                <td>{{bl.montantPrimes}}</td>
+              </tr>
+
+              <tr>
+                <th scope="row">salaire Brut:</th>
+                <td>{{bl.salaireBrut}}</td>
+              </tr>
+
+              <tr>
+                <th scope="row">Avance sur salaire:</th>
+                <td>{{bl.avance}}</td>
+              </tr>
+
+              <tr>
+                <th scope="row">Somme Gain:</th>
+                <td> {{bl.sommeGain}}</td>
+              </tr>
+
+              <tr>
+                <th scope="row">Prêts:</th>
+                <td> {{bl.pret}}</td>
+              </tr>
+
+              <tr>
+                <th scope="row">Anciennete:</th>
+                <td>{{bl.Anciennete}}</td>
+              </tr>
+
+              <tr>
+                <th scope="row">ITS:</th>
+                <td>{{bl.its}}</td>
+              </tr>
+
+              <tr>
+                <th scope="row">Montant Conges:</th>
+                <td>{{bl.congesAmount}}</td>
+              </tr>
+
+              <tr>
+                <th scope="row">licenciement et depart Retraite:</th>
+                <td>{{bl.retraiteAmount}}</td>
+              </tr>
+
+
+              <tr>
+                <th scope="row">net A Payer:</th>
+                <td>{{bl.netAPayer}}</td>
+              </tr>
+
+              </tbody>
+            </table>
+
+          </div>
+
+          <button printSectionId="print-section" ngxPrint class="btn btn-info"><span class="glyphicon glyphicon-print"></span> Imprimer</button>
+<br><br>
+        </div>
+
+
+        </div>
+</div>

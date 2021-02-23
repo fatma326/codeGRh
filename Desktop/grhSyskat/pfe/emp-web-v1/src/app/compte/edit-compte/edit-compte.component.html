@@ -1,0 +1,68 @@
+<div>
+  <div class="submit-form">
+    <form #addForm="ngForm" class="form-horizontal">
+      <div class="form-row">
+
+        <div class="form-group col-sm-6" >
+          <label for="numero Compte" class="col-sm-3 control-label" >Numero Compte:</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              id="numero Compte"
+              required
+              [(ngModel)]="item.numerCmpte"
+              name="numero Compte"
+            />
+          </div>
+        </div>
+
+
+
+        <div class="form-group col-sm-6" >
+          <label for="nomBanque" class="col-sm-3 control-label" >Nom Banque:</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              id="nomBanque"
+              required
+              [(ngModel)]="item.nomBanque"
+              name="nomBanque"
+            />
+          </div>
+        </div>
+
+
+
+
+        <div class="form-group col-sm-6" >
+          <label  class="col-sm-3 control-label" >employe: </label>
+          <div class="col-sm-9">
+            <p-multiSelect
+              [options]="employes"
+              optionLabel="nom"
+              dataKey="idEmploye"
+              [selectionLimit]="1"
+              [(ngModel)]="employe">
+            </p-multiSelect>
+          </div>
+        </div>
+
+
+
+        <div class="form-group col-sm-6">
+          <div class="col-sm-offset-3 col-sm-10" >
+            <button (click)="post()" class="btn btn-success" [disabled]="addForm.form.invalid">{{data.btn}}</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="submitted" class="alert alert-success" role="alert">
+    compte  a ete ajoute !
+  </div>
+</div> <!-- End ajouter -->
+

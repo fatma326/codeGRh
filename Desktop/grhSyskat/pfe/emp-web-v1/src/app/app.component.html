@@ -1,0 +1,68 @@
+<nav *ngIf="isAuthenticated()" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#"><i class="fas fa-home"></i> ACCUEIL</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item dropdown">
+          <a class="nav-link " href="/bultin-salaire" >
+            <span>Bulletin Salaire</span></a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Menu De Paramétrage
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+            <a class="dropdown-item" href="/cnam">CNAM</a>
+            <a class="dropdown-item" href="/its">ITS</a>
+            <a class="dropdown-item" href="/cnss">CNSS</a>
+            <a class="dropdown-item" href="/anciennete">ANCIENNETE</a>
+
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Deconnexion</a>
+           <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownPages">
+             <a class="dropdown-item" (click)="onLogout()">Déconnecté</a>
+
+          </div>
+        </li>
+      </ul>
+      <div style="position: absolute;right: 20%; color: #fff;top: 25px">Bienvenue {{getUsername()}} </div>
+    </div>
+  </div>
+</nav>
+
+
+<router-outlet>
+
+</router-outlet>
+
+
+
+<!--<footer class="page-footer font-small indigo">
+
+  <div class="container">
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://www.syskat.com/"> syskat.com </a>
+  </div>
+
+  </div>
+</footer>-->
+
+
+<script src="assets/vendor/jquery/jquery.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Footer -->
+<!--</div>
+Main Footer -->
+<!-- Footer -->

@@ -1,0 +1,7 @@
+.form-row {
+  height: 400px !important;
+}
+.col-sm-offset-3.col-sm-10 {
+
+  margin-left: 400px;
+}

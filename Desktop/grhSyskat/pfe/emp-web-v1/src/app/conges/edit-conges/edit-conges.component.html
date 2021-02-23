@@ -1,0 +1,81 @@
+<div>
+  <div class="submit-form">
+    <form #addForm="ngForm" class="form-horizontal">
+      <div class="form-row">
+
+        <div class="form-group col-sm-6" >
+          <label for="duree" class="col-sm-3 control-label" >Duree:</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              id="duree"
+              required
+              [(ngModel)]="item.duree"
+              name="duree"
+            />
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6" >
+          <label for="dateDebut" class="col-sm-3 control-label" >date Debut:</label>
+          <div class="col-sm-9">
+            <input
+              placeholder="Format JJ/MM/AAAA"
+              type="date"
+              class="form-control"
+              id="dateDebut"
+              [(ngModel)]="item.dateDebut"
+              name="dateDebut"
+            />
+          </div>
+        </div>
+
+        <div class="form-group col-sm-6" >
+          <label for="type" class="col-sm-3 control-label" >type: </label>
+          <div class="col-sm-9">
+            <select
+              class="form-control"
+              name="type"
+              id="type"
+              [(ngModel)]="item.type">
+              <option value="Conges Annuelles" >Conges Annuelles</option>
+            </select>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="form-group col-sm-6" >
+          <label  class="col-sm-3 control-label" >employe: </label>
+          <div class="col-sm-9">
+            <p-multiSelect
+              [options]="employes"
+              optionLabel="nom"
+              dataKey="idEmploye"
+              [selectionLimit]="1"
+              [(ngModel)]="employe">
+            </p-multiSelect>
+          </div>
+        </div>
+
+
+
+        <div class="form-group col-sm-6">
+          <div class="col-sm-offset-3 col-sm-10" >
+            <button (click)="post()" class="btn btn-success" [disabled]="addForm.form.invalid">{{data.btn}}</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="submitted" class="alert alert-success" role="alert">
+    conges a ete ajoute !
+  </div>
+</div> <!-- End ajouter -->
+

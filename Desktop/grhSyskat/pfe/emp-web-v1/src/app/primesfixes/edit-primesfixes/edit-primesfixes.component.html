@@ -1,0 +1,93 @@
+<div>
+  <div class="submit-form">
+    <form #addForm="ngForm" class="form-horizontal">
+      <div class="form-row">
+
+        <div class="form-group col-sm-6" >
+          <label for="nomPrime" class="col-sm-3 control-label" >nom Prime:</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              id="nomPrime"
+              required
+              [(ngModel)]="item.nomPrime"
+              name="nomPrime"
+            />
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6" >
+          <label for="date_primefx" class="col-sm-3 control-label" >Date prime fixe:</label>
+          <div class="col-sm-9">
+            <input
+              placeholder="Format JJ/MM/AAAA"
+              type="date"
+              class="form-control"
+              id="date_primefx"
+              [(ngModel)]="item.date_primefx"
+              name="date_primefx"
+            />
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6" >
+          <label for="code_Prime" class="col-sm-3 control-label" >Code Prime: </label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              id="code_Prime"
+              [(ngModel)]="item.code_Prime"
+              name="code_Prime"
+            />
+          </div>
+        </div>
+
+
+
+        <div class="form-group col-sm-6" >
+          <label for="valeur_prime" class="col-sm-3 control-label" >Valeur prime: </label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              id="valeur_prime"
+              [(ngModel)]="item.valeur_prime"
+              name="valeur_prime"
+            />
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6" >
+          <label  class="col-sm-3 control-label" >employe: </label>
+          <div class="col-sm-9">
+            <p-multiSelect
+              [options]="employes"
+              optionLabel="nom"
+              dataKey="idEmploye"
+              [selectionLimit]="1"
+              [(ngModel)]="employe">
+            </p-multiSelect>
+          </div>
+        </div>
+
+
+
+        <div class="form-group col-sm-6">
+          <div class="col-sm-offset-3 col-sm-10" >
+            <button (click)="post()" class="btn btn-success" [disabled]="addForm.form.invalid">{{data.btn}}</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="submitted" class="alert alert-success" role="alert">
+    prime fixe a ete ajoute !
+  </div>
+</div> <!-- End ajouter -->

@@ -1,0 +1,95 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="item">
+      <div class="form-horizontal">
+        <div class="form-row">
+
+
+          <div class="form-group col-sm-6" >
+            <label for="nom" class="col-sm-3 control-label" >nom: </label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id="nom"
+                [(ngModel)]="item.nom"
+                name="nom"
+              />
+            </div>
+          </div>
+
+
+          <div class="form-group col-sm-6" >
+            <label  class="col-sm-3 control-label" >Parent id: </label>
+            <div class="col-sm-9">
+              <p-multiSelect
+                [options]="ParentDeps"
+                optionLabel="nom"
+                dataKey="id"
+                [selectionLimit]="1"
+                [(ngModel)]="ParentDep">
+              </p-multiSelect>
+            </div>
+          </div>
+
+
+          <div class="form-group col-sm-6" >
+            <label  class="col-sm-3 control-label" >type departement: </label>
+            <div class="col-sm-9">
+              <p-multiSelect
+                [options]="TypeDepartements"
+                optionLabel="libelle"
+                dataKey="idType"
+                [selectionLimit]="1"
+                [(ngModel)]="TypeDepartement">
+              </p-multiSelect>
+            </div>
+          </div>
+
+          <div class="form-group col-sm-6" >
+            <label  class="col-sm-3 control-label" >employe: </label>
+            <div class="col-sm-9">
+              <p-multiSelect
+                [options]="employes"
+                optionLabel="nom"
+                dataKey="idEmploye"
+                [selectionLimit]="1"
+                [(ngModel)]="employe">
+              </p-multiSelect>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+          <div class="form-group col-sm-6" >
+            <label  class="col-sm-3 control-label" >Profession: </label>
+            <div class="col-sm-9">
+              <p-multiSelect
+                [options]="Professions"
+                optionLabel="nom"
+                dataKey="idProfession"
+                [selectionLimit]="1"
+                [(ngModel)]="Profession">
+              </p-multiSelect>
+            </div>
+          </div>
+
+
+
+          <div class="form-group col-md-6">
+            <div class="col-sm-offset-3 col-sm-10" >
+              <button type="submit" (click)="post()" class="btn btn-success" >{{data.btn}}</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

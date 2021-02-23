@@ -1,0 +1,94 @@
+<div>
+  <div class="submit-form">
+    <form #addForm="ngForm" class="form-horizontal">
+      <div class="form-row">
+
+        <div class="form-group col-sm-6" >
+          <label for="valeur" class="col-sm-3 control-label" >valeur:</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              id="valeur"
+              required
+              [(ngModel)]="item.valeur"
+              name="valeur"
+            />
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6" >
+          <label for="date_affectation" class="col-sm-3 control-label" >date_affectation:</label>
+          <div class="col-sm-9">
+            <input
+              placeholder="Format JJ/MM/AAAA"
+              type="date"
+              class="form-control"
+              id="date_affectation"
+              [(ngModel)]="item.date_affectation"
+              name="date_affectation"
+            />
+          </div>
+        </div>
+
+        <div class="form-group col-sm-6" >
+          <label for="type" class="col-sm-3 control-label" >type:</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              id="type"
+              required
+              [(ngModel)]="item.type"
+              name="type"
+            />
+          </div>
+        </div>
+
+
+      <div class="form-group col-sm-6" >
+        <label for="mois" class="col-sm-3 control-label" >mois:</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            id="mois"
+            required
+            [(ngModel)]="item.mois"
+            name="mois"
+          />
+        </div>
+      </div>
+
+
+        <div class="form-group col-sm-6" >
+          <label  class="col-sm-3 control-label" >employe: </label>
+          <div class="col-sm-9">
+            <p-multiSelect
+              [options]="employes"
+              optionLabel="nom"
+              dataKey="idEmploye"
+              [selectionLimit]="1"
+              [(ngModel)]="employe">
+            </p-multiSelect>
+          </div>
+        </div>
+
+
+
+        <div class="form-group col-sm-6">
+          <div class="col-sm-offset-3 col-sm-10" >
+            <button (click)="post()" class="btn btn-success" [disabled]="addForm.form.invalid">{{data.btn}}</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="submitted" class="alert alert-success" role="alert">
+    avance sur salaire  a ete ajoute !
+  </div>
+</div> <!-- End ajouter -->
+

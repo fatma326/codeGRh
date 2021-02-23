@@ -1,0 +1,140 @@
+div.panel.panel-info{
+  margin-left: 1%;
+  margin-top: 40px;
+}
+.card-footer > a{
+  width: 100%;
+}
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+
+
+footer {
+  color: #caced1 !important
+}
+
+li {
+  margin-top: 20px;
+  margin-bottom: 20px
+}
+
+.Careers {
+  cursor: pointer;
+  color: #1E88E5
+}
+
+.row-1 {
+  background-color: #1E242A !important
+}
+
+.row-2 {
+  background-color: #28323C !important
+}
+
+
+
+
+a {
+  color: #5D6975;
+  text-decoration: underline;
+}
+
+body {
+  position: relative;
+  width: 21cm;
+  height: 29.7cm;
+  margin: 0 auto;
+  color: #001028;
+  background: #FFFFFF;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-family: Arial;
+}
+
+header {
+  padding: 10px 0;
+  margin-bottom: 30px;
+}
+
+#logo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#logo img {
+  width: 90px;
+}
+
+
+#project {
+  float: left;
+}
+
+h1 {
+  border-top: 1px solid  #5D6975;
+  border-bottom: 1px solid  #5D6975;
+  color: #5D6975;
+  font-size: 2.4em;
+  line-height: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+#project span {
+  color: #5D6975;
+  text-align: right;
+  width: 52px;
+  margin-right: 10px;
+  display: inline-block;
+  font-size: 0.8em;
+}
+
+#company {
+  float: right;
+  text-align: right;
+}
+
+#project div,
+#company div {
+  white-space: nowrap;
+}
+img {
+  float: right;
+}
+
+header.clearfix {
+  /* text-align: center; */
+  width: 7000px;
+}
+table tr:nth-child(2n-1) td {
+  background: #F5F5F5;
+}
+
+table th {
+  padding: 5px 20px;
+  color: #5D6975;
+  border-bottom: 1px solid #C1CED9;
+  white-space: nowrap;
+  font-weight: normal;
+}
+
+button.btn.btn-info {
+  margin-left: 175px;
+  float: right !important;
+}
+
+table .service,
+table .desc {
+  text-align: left;
+}
+
+table td {
+  padding: 20px;
+  text-align: right;
+}
+table td.grand {
+  border-top: 1px solid #5D6975;;
+}
+
